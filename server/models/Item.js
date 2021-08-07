@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ItemSchema = new Schema({
-    item: String,
+    name: String,
     price: Number,
     unit: String,
     count: Number, 
