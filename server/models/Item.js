@@ -4,9 +4,9 @@ const Schema = mongoose.Schema;
 
 const ItemSchema = new Schema({
     name: String,
-    price: Number,
+    price: String,
     unit: String,
-    count: Number, 
+    count: String, 
 });
 
 const Item = mongoose.model("Item", ItemSchema);
