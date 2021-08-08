@@ -1,8 +1,9 @@
-
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
-   type User{
+
+
+type User{
         _id: ID
         name: String!
         email: String!
@@ -10,10 +11,10 @@ const typeDefs = gql`
         state: String
         town: String
         address: String
-        zip: Number
-        farms:[Farm]
+        zip: String
+        
      }
-
+  
      type Farm{
          _id: ID
          name: String!
@@ -22,40 +23,60 @@ const typeDefs = gql`
          town: String!
          address: String!
          website: String
-         zip: Number!
-         items: [Item]
+         zip: String!
+      
          
      }
-     type Item{
-         _id: ID
-         name: String!
-         price: Number!
-         count: Number!
-         unit: String!
-     }
-   type Auth {
-     token: ID!
-     user: User,
-
- }
- 
+     
    type Query {
-     user: [User]!
-     farm: [Farm]!
-     item: [Item]!
-    
+ 
+    farm: [Farm]!
+    farms: [Farm]
+    user: [User]!
+    users: [User]
    }
  
-   type Mutation {
-     add User(name: String!, email: String!, password: String!, state: String!,town: String!, address: String, Zip: Number ): Auth
-     login(email: String!): Auth
- 
-     add Farm(name: String!, email: String!, website: String, description: String!, state: String!, town: String!, address: String!, Zip: Number): Farm
-     login(email: String!): Auth
   
-     add Item( name: String!,  price: Number!, count: Number!, unit: String! )
-    }
 
  `;
 
 module.exports = typeDefs;
+
+
+
+// type Mutation {
+//     addUser(name: String!, email: String!, password: String!, state: String!,town: String!, address: String, Zip: Number ): Auth
+//     login(email: String!): Auth
+
+//     addFarm(name: String!, email: String!, website: String, description: String!, state: String!, town: String!, address: String!, Zip: Number): Farm
+//     login(email: String!): Auth
+ 
+//     addItem( name: String!,  price: Number!, count: Number!, unit: String! )
+//    }
+
+
+
+
+
+
+
+// type Item{
+//     _id: ID
+//     name: String!
+//     price: Number!
+//     count: Number!
+//     unit: String!
+// }
+// type Auth {
+// token: ID!
+// user: User,
+
+// }
+
+
+// type Query {
+//     user: [User]!
+//     farm: [Farm]!
+//     item: [Item]!
+   
+//   }
