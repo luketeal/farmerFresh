@@ -1,0 +1,30 @@
+[
+    {
+        "name": "Finson Farm",
+        "description": "An Awesome Farm",
+        "state": "MA",
+        "town": "Boston",
+        "address": "Main street Boston",
+        "website": "FF websit",
+        "zip": "03301"
+    },
+    {
+        "name": "The real Farm",
+        "description": "An Awesomer Farm",
+        "state": "NH",
+        "town": "Dover",
+        "address": "Main street Dover",
+        "website": "FA websit",
+        "zip": "03383"
+    },
+    {
+        "name": "Corn Farm",
+        "description": "An Awesomest Farm",
+        "state": "NH",
+        "town": "Salem",
+        "address": "Main street Salem",
+        "website": "FC websit",
+        "zip": "03079"
+    }
+]
+  

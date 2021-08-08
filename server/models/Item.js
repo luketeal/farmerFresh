@@ -3,10 +3,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ItemSchema = new Schema({
-    name: String,
-    price: String,
+    item: String,
+    price: Number,
     unit: String,
-    count: String, 
+    count: Number, 
 });
 
 const Item = mongoose.model("Item", ItemSchema);
