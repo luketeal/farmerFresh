@@ -27,6 +27,15 @@ type User{
       
          
      }
+
+     type Item{
+    _id: ID
+    name: String!
+    price: String!
+    unit: String!
+    count: String!
+    
+}
      
    type Query {
  
@@ -34,6 +43,8 @@ type User{
     farms: [Farm]
     user: [User]!
     users: [User]
+    item: [Item]!
+    items: [Item]
    }
  
   
@@ -60,13 +71,7 @@ module.exports = typeDefs;
 
 
 
-// type Item{
-//     _id: ID
-//     name: String!
-//     price: Number!
-//     count: Number!
-//     unit: String!
-// }
+
 // type Auth {
 // token: ID!
 // user: User,

@@ -1,6 +1,6 @@
 // const { AuthenticationError } = require('apollo-server-express');
-// const { User } = require('../models');
-const { Farm, User } = require('../models');
+
+const { Farm, User, Item } = require('../models');
 // const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -31,6 +31,9 @@ const resolvers = {
         return User.find();
     },
     // query for items based on farms
+    items: async (parent, args) => {
+      return Item.find();
+  },
 
 // mutation to add farms
 
