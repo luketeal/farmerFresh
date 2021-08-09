@@ -1,6 +1,7 @@
 // const { AuthenticationError } = require('apollo-server-express');
 
 const { Farm, User, Item } = require('../models');
+const { populate } = require('../models/Farm');
 // const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -23,27 +24,30 @@ const resolvers = {
     },
 
     // query for farms based on farmer
-    user: async (parent, { name }) => {
-        return User.findOne({ name });
+    farms: async (parent, { name }) => {
+        return Farm.findOne({ name });populate('User').populate({
+          path: 'user',
+          populate: 'items'
+        });
       },
 
-      users: async (parent, args) => {
-        return User.find();
+      farms: async (parent, args) => {
+        return awaitUser.find();
     },
     // query for items based on farms
     items: async (parent, args) => {
-      return Item.find();
+      return await Item.find({}).populate('users');
   },
 
 // mutation to add farms
-
+addFarms: async(parent, {name, description, state, town, address, zip, website,}) => {
+  return await Farm.create({ name,description, state, town, address, zip, website});
+}
 // mutation to add users
 
 // mutation to add items
 
-// mutation to update farms/users/items
-
-
+// mutation to update farms/users/item
 
 
     // By adding context to our query, we can retrieve the logged in user without specifically searching for them
