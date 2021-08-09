@@ -12,7 +12,7 @@ type User{
         town: String
         address: String
         zip: String
-        
+        farms:[Farm]
      }
   
      type Farm{
@@ -24,9 +24,19 @@ type User{
          address: String!
          website: String
          zip: String!
-      
+         items: [Item]
          
      }
+     type Item{
+         _id: ID
+         name: String!
+         price: String!
+         count: String!
+         unit: String!
+     }
+   type Auth {
+     token: ID!
+     user: User,
 
      type Item{
     _id: ID
@@ -48,6 +58,15 @@ type User{
    }
  
   
+   type Mutation {
+     add User(name: String!, email: String!, password: String!, state: String!,town: String!, address: String, Zip: String ): Auth
+     login(email: String!): Auth
+ 
+     add Farm(name: String!, email: String!, website: String, description: String!, state: String!, town: String!, address: String!, Zip: String): Farm
+     login(email: String!): Auth
+  
+     add Item( name: String!,  price: String!, count: String!, unit: String! )
+    }
 
  `;
 
