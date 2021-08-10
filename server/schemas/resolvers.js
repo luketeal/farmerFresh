@@ -25,27 +25,35 @@ const resolvers = {
 
     // query for farms based on farmer
     farms: async (parent, { name }) => {
-        return Farm.findOne({ name });populate('User').populate({
+        return Farm.findOne({ name }).populate({
           path: 'user',
           populate: 'items'
         });
       },
 
       farms: async (parent, args) => {
-        return awaitUser.find();
+        return await User.find();
     },
     // query for items based on farms
     items: async (parent, args) => {
       return await Item.find({}).populate('users');
+    },
   },
 
 // mutation to add farms
-addFarms: async(parent, {name, description, state, town, address, zip, website,}) => {
-  return await Farm.create({ name,description, state, town, address, zip, website});
-}
+  Mutation: {
+    addFarm: async(parent, {name, description, state, town, address, zip, website,}) => {
+      return await Farm.create({ name,description, state, town, address, zip, website});
+    }
+  },
 // mutation to add users
 
 // mutation to add items
+Mutation: {
+  addItem: async(parent, {name, price, count, unit}) => {
+    return await Item.create({ name, price, count, unit});
+  }
+},
 
 // mutation to update farms/users/item
 
@@ -57,12 +65,6 @@ addFarms: async(parent, {name, description, state, town, address, zip, website,}
 //       }
 //       throw new AuthenticationError('You need to be logged in!');
 //     },
-  },
-
-
-
-
-
 
 
 };
