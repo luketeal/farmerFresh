@@ -18,7 +18,7 @@ type User{
      type Farm{
          _id: ID
          name: String!
-         description: String!
+         description: String
          state: String!
          town: String!
          address: String!
@@ -34,18 +34,7 @@ type User{
          count: String!
          unit: String!
      }
-   type Auth {
-     token: ID!
-     user: User,
-
-     type Item{
-    _id: ID
-    name: String!
-    price: String!
-    unit: String!
-    count: String!
-    
-}
+ 
      
    type Query {
  
@@ -56,17 +45,16 @@ type User{
     item: [Item]!
     items: [Item]
    }
- 
+   
   
    type Mutation {
-     add User(name: String!, email: String!, password: String!, state: String!,town: String!, address: String, Zip: String ): Auth
-     login(email: String!): Auth
- 
-     add Farm(name: String!, email: String!, website: String, description: String!, state: String!, town: String!, address: String!, Zip: String): Farm
-     login(email: String!): Auth
-  
-     add Item( name: String!,  price: String!, count: String!, unit: String! )
-    }
+     
+    
+     addFarm(name: String!, email: String!, website: String, description: String!, state: String!, town: String!, address: String!, Zip: String): Farm
+    
+
+      addItem(name: String!, price: String!, Count: String!, Unit: String!): Item
+     }
 
  `;
 
@@ -80,13 +68,17 @@ module.exports = typeDefs;
 
 //     addFarm(name: String!, email: String!, website: String, description: String!, state: String!, town: String!, address: String!, Zip: Number): Farm
 //     login(email: String!): Auth
- 
+
 //     addItem( name: String!,  price: Number!, count: Number!, unit: String! )
 //    }
 
+// add User(name: String!, email: String!, password: String!, state: String!,town: String!, address: String, Zip: String )
 
+ //  type Auth {
+  // token: ID!
+  // user: User,
 
-
+// }
 
 
 
@@ -102,5 +94,11 @@ module.exports = typeDefs;
 //     user: [User]!
 //     farm: [Farm]!
 //     item: [Item]!
-   
+
 //   }
+// login(email: String!)
+
+// add Farm(name: String!, email: String!, website: String, description: String!, state: String!, town: String!, address: String!, Zip: String): Farm
+// login(email: String!)
+
+// add Item( name: String!,  price: String!, count: String!, unit: String! )
