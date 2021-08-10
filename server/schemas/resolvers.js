@@ -3,24 +3,18 @@
 const { Farm, User, Item } = require('../models');
 const { populate } = require('../models/Farm');
 // const { signToken } = require('../utils/auth');
+const {getZips} = require('../utils/getZips');
 
 const resolvers = {
   Query: {
-    // profiles: async () => {
-    //   return Profile.find();     // Commented out because no need of finding all users
-    // },
-
-
-
-    // ----------------------------------------------------------------------------------------
-    // user: async (parent, { userId }) => {
-    //   return User.findOne({ _id: userId });
-    // },
-    // ----------------------------------------------------------------------------------------------------------------------------
     
     // query for farms basaed on zip
     farms: async (parent, args) => {
         return Farm.find();
+    },
+
+    farm: async (parent, { zip }) => {
+      return Farm.findOne({ zip });
     },
 
     // query for farms based on farmer
@@ -33,6 +27,13 @@ const resolvers = {
 
       farms: async (parent, args) => {
         return await User.find();
+      },
+    users: async (parent, args) => {
+      return User.find();
+    },
+
+    item: async (parent, { name }) => {
+      return Item.findOne({ name });
     },
     // query for items based on farms
     items: async (parent, args) => {
