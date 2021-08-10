@@ -1,5 +1,5 @@
 const fetch = require("node-fetch");
-// require('dotenv').config();
+
 
 module.exports = {
     getZips: async function ( zip ) {
@@ -13,6 +13,10 @@ module.exports = {
                 "x-rapidapi-host": "redline-redline-zipcode.p.rapidapi.com"
             }
         })
-        const data = response.json()
-        return data
+        const data = await response.json()
+        let zipArray = [];
+        for (let each of data.zip_codes) {
+            zipArray.push(each.zip_code)
+        }
+        return zipArray
 }}
