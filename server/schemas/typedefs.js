@@ -4,6 +4,7 @@ const typeDefs = gql`
 
 
 type User{
+
         _id: ID
         name: String!
         email: String!
@@ -15,7 +16,8 @@ type User{
         farms:[Farm]
      }
   
-     type Farm{
+type Farm{
+
          _id: ID
          name: String!
          description: String
@@ -36,13 +38,13 @@ type User{
      }
  
      
-   type Query {
+type Query {
  
-    farm: [Farm]!
+    farm(zip: String!): Farm
     farms: [Farm]
-    user: [User]!
+    user(name: String!): User
     users: [User]
-    item: [Item]!
+    item(name: String!): Item
     items: [Item]
    }
    
@@ -83,11 +85,7 @@ module.exports = typeDefs;
 
 
 
-// type Auth {
-// token: ID!
-// user: User,
 
-// }
 
 
 // type Query {
