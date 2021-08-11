@@ -1,4 +1,4 @@
-import React from 'react'
+import './posts.scss'
 
 export default function posts() {
     return (
