@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from './components/Header/Header'
 import Splash from './pages/Splash'
@@ -13,7 +13,7 @@ function App() {
     <Router>
       <div className="App">
         <Header/>
-          <div className="container">
+          <div className="app-container">
             <Route exact path="/">
               <Splash />
             </Route>
