@@ -38,6 +38,13 @@ const resolvers = {
       return User.find();
     },
 
+    user: async (parent, {name}) => {
+      return User.findOne({name}).populate('farms').populate({
+        path: 'farms',
+        populate: 'items'
+      })
+    },
+
     item: async (parent, { name }) => {
       return Item.findOne({ name });
     },

@@ -6,9 +6,9 @@ const typeDefs = gql`
 type User{
 
         _id: ID
-        name: String!
-        email: String!
-        password: String!
+        name: String
+        email: String
+        password: String
         state: String
         town: String
         address: String
@@ -31,10 +31,10 @@ type Farm{
      }
      type Item{
          _id: ID
-         name: String!
-         price: String!
-         count: String!
-         unit: String!
+         name: String
+         price: String
+         count: String
+         unit: String
      }
  
      

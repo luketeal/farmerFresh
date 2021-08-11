@@ -77,3 +77,39 @@ query allFarms {
   "zip": ["03079", "03383"]
 }
 
+
+----------------------
+//query
+query singleUser($name: String!) {
+  user(name: $name) {
+    _id
+    name
+    email
+    password
+    state
+    town
+    address
+    zip
+    farms {
+      _id
+      name
+      description
+      state
+      town
+      address
+      website
+      zip
+      items {
+        _id
+        name
+        price
+        count
+        unit
+      }
+    }
+  }
+}
+query variable
+{
+    "name": "Luke"
+}
