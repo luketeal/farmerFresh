@@ -5,29 +5,35 @@ const { populate } = require('../models/Farm');
 // const { signToken } = require('../utils/auth');
 const {getZips} = require('../utils/getZips');
 
+
+
 const resolvers = {
   Query: {
     
-    // query for farms basaed on zip
+    // query for farms
     farms: async (parent, args) => {
-        return Farm.find();
+        return Farm.find().populate('items');
     },
 
     farm: async (parent, { zip }) => {
-      return Farm.findOne({ zip });
+      return Farm.findOne({ zip }).populate('items');
+    },
+
+    farmsByZip: async (parent, { zip }) => {
+      return Farm.find({ zip }).populate('items');
     },
 
     // query for farms based on farmer
-    farms: async (parent, { name }) => {
-        return Farm.findOne({ name }).populate({
-          path: 'user',
-          populate: 'items'
-        });
-      },
+    // farms: async (parent, { name }) => {
+    //     return Farm.findOne({ name }).populate({
+    //       path: 'user',
+    //       populate: 'items'
+    //     });
+    //   },
 
-      farms: async (parent, args) => {
-        return await User.find();
-      },
+    //   farms: async (parent, args) => {
+    //     return await User.find();
+    //   },
     users: async (parent, args) => {
       return User.find();
     },

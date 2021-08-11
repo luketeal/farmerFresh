@@ -42,6 +42,7 @@ type Query {
  
     farm(zip: String!): Farm
     farms: [Farm]
+    farmsByZip (zip: [String!]): [Farm]
     user(name: String!): User
     users: [User]
     item(name: String!): Item

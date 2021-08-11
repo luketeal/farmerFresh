@@ -1,0 +1,79 @@
+
+// ------------------------------
+//query 
+
+query singleFarm($zip: String!) {
+    farm(zip: $zip) {
+      _id
+      name
+      description
+      state
+      town
+      address
+      website
+      zip
+      items {
+        _id
+        name
+        price
+        count
+        unit
+      }
+    }
+}
+
+// query variables
+{
+    "zip": "03079"
+}
+
+// ------------------------------
+
+// query 
+query allFarms {
+    farms{
+    _id
+    name
+    description
+    state
+    town
+    address
+    website
+    zip
+    items {
+      _id
+      name
+      price
+      count
+      unit
+    }
+    }
+}
+  
+// -----------------------
+// query 
+  query allFarmsByZip($zip: [String!]) {
+    farmsByZip(zip: $zip) {
+      _id
+      name
+      description
+      state
+      town
+      address
+      website
+      zip
+      items {
+        _id
+        name
+        price
+        count
+        unit
+      }
+    }
+  }
+
+// query variables
+  {
+  "zip": ["03079", "03383"]
+}
+
