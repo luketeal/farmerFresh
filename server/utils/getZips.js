@@ -10,7 +10,7 @@ module.exports = {
             var response = await fetch(requestURL, {
                 "method": "GET",
                 "headers": {
-                    "x-rapidapi-key": "e972b7d645mshf34d0fe56773d97p1fc220jsn1e1d00244010",
+                    "x-rapidapi-key": process.env.REDLINE_API_KEY,
                     "x-rapidapi-host": "redline-redline-zipcode.p.rapidapi.com"
                 }
             })        
