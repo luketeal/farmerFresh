@@ -42,18 +42,38 @@ const resolvers = {
   },
 
 // mutation to add farms
-  Mutation: {
-    addFarm: async(parent, {name, description, state, town, address, zip, website,}) => {
-      return await Farm.create({ name,description, state, town, address, zip, website});
-    }
-  },
+  // Mutation: {
+  //   addFarm: async(parent, {name, description, state, town, address, zip, website,}) => {
+  //     return await Farm.create({ name,description, state, town, address, zip, website});
+  //   }
+  // },
+    Mutation: {
+    addFarm: async(parent, {name}) => {
+      return await Farm.create(
+        { 
+          name: name
+        });
+    },
+
+    // example mutation from testing 
+    // mutation addFarm($name: String!) {
+    //   addFarm(name: $name) {
+    //     name
+    //   }
+    // }
+    // Query Variable
+    // {
+    //   "name": "JEDI"
+    // }
+
+  
 // mutation to add users
 
 // mutation to add items
-Mutation: {
-  addItem: async(parent, {name, price, count, unit}) => {
-    return await Item.create({ name, price, count, unit});
-  }
+
+    addItem: async(parent, {name, price, count, unit}) => {
+      return await Item.create({ name, price, count, unit});
+    }
 },
 
 // mutation to update farms/users/item

@@ -16,21 +16,20 @@ db.once('open', async () => {
   const items = await Item.insertMany(itemData);
   const users = await User.insertMany(userData);
 
-//   for (newFarm of farms) {
-//     // randomly add each class to a school
-//     const tempUser = users[Math.floor(Math.random() * users.length)];
-//     tempUser.farms.push(newFarm._id);
-//     await tempSchool.save();
+  for (newFarm of farms) {
+    // randomly add each class to a school
+    const tempUser = users[Math.floor(Math.random() * users.length)];
+  
+    tempUser.farms.push(newFarm._id);
+    await tempUser.save();
+    // console.log(tempUser);
 
-//     // randomly add a professor to each class
-//     const tempProfessor = professors[Math.floor(Math.random() * professors.length)];
-//     newClass.professor = tempProfessor._id;
-//     await newClass.save();
+    // randomly add a professor to each class
+    const tempItem = items[Math.floor(Math.random() * items.length)];
+    newFarm.items.push(tempItem._id);
+    await newFarm.save();
 
-//     // reference class on professor model, too
-//     tempProfessor.classes.push(newClass._id);
-//     await tempProfessor.save();
-//   }
+  }
 
   console.log('all done!');
   process.exit(0);
