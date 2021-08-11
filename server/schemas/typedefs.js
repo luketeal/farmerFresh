@@ -52,7 +52,7 @@ type Query {
    type Mutation {
      
     
-     addFarm(name: String): Farm
+     addFarm(name: String!): Farm
     
 
       addItem(name: String!, price: String!, Count: String!, Unit: String!): Item
