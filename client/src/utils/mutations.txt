@@ -1,0 +1,13 @@
+
+// ------------------------
+// mutation
+mutation addFarm($name: String!) {
+    addFarm(name: $name) {
+        name
+    }
+}
+
+// variables
+{
+    "name": "JEDI"
+  }
