@@ -42,11 +42,17 @@ const resolvers = {
   },
 
 // mutation to add farms
-  Mutation: {
-    addFarm: async(parent, {name, description, state, town, address, zip, website,}) => {
-      return await Farm.create({ name,description, state, town, address, zip, website});
+  // Mutation: {
+  //   addFarm: async(parent, {name, description, state, town, address, zip, website,}) => {
+  //     return await Farm.create({ name,description, state, town, address, zip, website});
+  //   }
+  // },
+    Mutation: {
+    addFarm: async(parent, {name}) => {
+      return await Farm.create({ name});
     }
   },
+  
 // mutation to add users
 
 // mutation to add items

@@ -19,13 +19,13 @@ type User{
 type Farm{
 
          _id: ID
-         name: String!
+         name: String
          description: String
-         state: String!
-         town: String!
-         address: String!
+         state: String
+         town: String
+         address: String
          website: String
-         zip: String!
+         zip: String
          items: [Item]
          
      }
@@ -52,7 +52,7 @@ type Query {
    type Mutation {
      
     
-     addFarm(name: String!, email: String!, website: String, description: String!, state: String!, town: String!, address: String!, Zip: String): Farm
+     addFarm(name: String): Farm
     
 
       addItem(name: String!, price: String!, Count: String!, Unit: String!): Item
@@ -62,7 +62,8 @@ type Query {
 
 module.exports = typeDefs;
 
-
+// ---------------------------------------    addFarm(name: String!, email: String!, website: String, description: String!, state: String!, town: String!, address: String!, Zip: String): Farm
+    
 
 // type Mutation {
 //     addUser(name: String!, email: String!, password: String!, state: String!,town: String!, address: String, Zip: Number ): Auth
