@@ -90,7 +90,48 @@ const resolvers = {
     // mutation to update farms
 
     updateFarm:  async(parent, {_id, name, description, state, town, address, website, zip}) => {
-      let originalItem = await Farm.findOne({ _id })
+      let originalFarm = await Farm.findOne({ _id })
+      let updatedFarm = originalFarm
+      let edits
+      edits = false
+      if(originalFarm.name !== name) {
+        updatedFarm.name = name
+        edits = true
+      }
+      if(originalFarm.description !== description) {
+        updatedFarm.description = description
+        edits = true
+      }
+      if(originalFarm.state !== state) {
+        updatedFarm.state = state
+        edits = true
+      }
+      if(originalFarm.town !== town) {
+        updatedFarm.town = town
+        edits = true
+      }
+      if(originalFarm.address !== address) {
+        updatedFarm.address = address
+        edits = true
+      }
+      if(originalFarm.website !== website) {
+        updatedFarm.website = website
+        edits = true
+      }
+      if(originalFarm.zip !== zip) {
+        updatedFarm.zip = zip
+        edits = true
+      }
+      if(edits === true) {
+        updatedFarm.__v++
+      }
+      await updatedFarm.save()
+
+      return Farm.findOne({ _id }).populate('items')
+    },
+
+    updateItem:  async(parent, {_id, name, price, count, unit}) => {
+      let originalItem = await Item.findOne({ _id })
       let updatedItem = originalItem
       let edits
       edits = false
@@ -98,41 +139,25 @@ const resolvers = {
         updatedItem.name = name
         edits = true
       }
-      if(originalItem.description !== description) {
-        updatedItem.description = description
+      if(originalItem.price !== price) {
+        updatedItem.price = price
         edits = true
       }
-      if(originalItem.state !== state) {
-        updatedItem.state = state
+      if(originalItem.count !== count) {
+        updatedItem.count = count
         edits = true
       }
-      if(originalItem.town !== town) {
-        updatedItem.town = town
-        edits = true
-      }
-      if(originalItem.address !== address) {
-        updatedItem.address = address
-        edits = true
-      }
-      if(originalItem.website !== website) {
-        updatedItem.website = website
-        edits = true
-      }
-      if(originalItem.zip !== zip) {
-        updatedItem.zip = zip
+      if(originalItem.unit !== unit) {
+        updatedItem.unit = unit
         edits = true
       }
       if(edits === true) {
         updatedItem.__v++
       }
-      await updatedItem.save()
 
-      return Farm.findOne({ _id }).populate('items')
+      return await updatedItem.save()
     }
-
 },
-
-
 
 // mutation to update users
 
