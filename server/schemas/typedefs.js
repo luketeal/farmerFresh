@@ -52,10 +52,11 @@ type Query {
   
 type Mutation {
     
-addFarm(name: String!, description: String, state: String!, town: String!, address: String!, website: String!, zip: String!): Farm
-addItem(name: String!, price: String!, count: String!, unit: String!, farmID: ID!): Farm
-addUser(name: String!, email: String!, password: String!, state: String, town: String, address: String, zip: String): User
-
+    addFarm(name: String!, description: String, state: String!, town: String!, address: String!, website: String!, zip: String!): Farm
+    addItem(name: String!, price: String!, count: String!, unit: String!, farmID: ID!): Farm
+    addUser(name: String!, email: String!, password: String!, state: String, town: String, address: String, zip: String): User
+    updateFarm(_id: ID!, name: String, description: String, state: String, town: String, address: String, website: String, zip: String): Farm
+    updateItem(_id: ID!, name: String, price: String, count: String, unit: String): Item
 }
 
  `;
