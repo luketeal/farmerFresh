@@ -85,7 +85,6 @@ query singleUser($name: String!) {
     _id
     name
     email
-    password
     state
     town
     address
