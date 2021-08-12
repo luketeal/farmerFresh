@@ -3,7 +3,7 @@
 const { Farm, User, Item } = require('../models');
 const { populate } = require('../models/Farm');
 // const { signToken } = require('../utils/auth');
-const {getZips} = require('../utils/getZips');
+// const {getZips} = require('../utils/getZips');
 
 
 
@@ -55,37 +55,36 @@ const resolvers = {
   },
 
 // mutation to add farms
-  // Mutation: {
-  //   addFarm: async(parent, {name, description, state, town, address, zip, website,}) => {
-  //     return await Farm.create({ name,description, state, town, address, zip, website});
-  //   }
-  // },
-    Mutation: {
-    addFarm: async(parent, {name}) => {
+  Mutation: {
+    addFarm: async(parent, {name, description, state, town, address, website, zip}) => {
       return await Farm.create(
         { 
-          name: name
+          name: name,
+          description: description, 
+          state: state, 
+          town: town, 
+          address: address, 
+          website: website, 
+          zip: zip
         });
     },
-
-    // example mutation from testing 
-    // mutation addFarm($name: String!) {
-    //   addFarm(name: $name) {
-    //     name
-    //   }
-    // }
-    // Query Variable
-    // {
-    //   "name": "JEDI"
-    // }
-
   
 // mutation to add users
 
+    addUser: async(parent, {name, email, password, state, town, address, zip}) => {
+      return await User.create({name, email, password, state, town, address, zip})
+    },
+
 // mutation to add items
 
-    addItem: async(parent, {name, price, count, unit}) => {
-      return await Item.create({ name, price, count, unit});
+    addItem: async(parent, {name, price, count, unit, farmID}) => {
+      let newItem = await Item.create({ name, price, count, unit});
+      let updatedFarm = await Farm.findOneAndUpdate(
+        {_id: farmID},
+        {$addToSet: {items: newItem._id}},
+        {new: true}
+        ).populate('items')
+      return updatedFarm
     }
 },
 
