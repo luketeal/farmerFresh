@@ -8,7 +8,6 @@ type User{
         _id: ID
         name: String
         email: String
-        password: String
         state: String
         town: String
         address: String
@@ -18,24 +17,25 @@ type User{
   
 type Farm{
 
-         _id: ID
-         name: String
-         description: String
-         state: String
-         town: String
-         address: String
-         website: String
-         zip: String
-         items: [Item]
-         
-     }
-     type Item{
-         _id: ID
-         name: String
-         price: String
-         count: String
-         unit: String
-     }
+    _id: ID
+    name: String
+    description: String
+    state: String
+    town: String
+    address: String
+    website: String
+    zip: String
+    items: [Item]
+    
+}
+
+type Item{
+    _id: ID
+    name: String
+    price: String
+    count: String
+    unit: String
+}
  
      
 type Query {
@@ -47,19 +47,16 @@ type Query {
     users: [User]
     item(name: String!): Item
     items: [Item]
-   }
+}
    
   
-   type Mutation {
-     
+type Mutation {
     
-    addFarm(name: String!, description: String, state: String!, town: String!, address: String!, website: String!, zip: String!): Farm
+addFarm(name: String!, description: String, state: String!, town: String!, address: String!, website: String!, zip: String!): Farm
+addItem(name: String!, price: String!, count: String!, unit: String!, farmID: ID!): Farm
+addUser(name: String!, email: String!, password: String!, state: String, town: String, address: String, zip: String): User
 
-    addItem(name: String!, price: String!, count: String!, unit: String!, farmID: ID!): Farm
-
-
-
-    }
+}
 
  `;
 

@@ -55,12 +55,7 @@ const resolvers = {
   },
 
 // mutation to add farms
-  // Mutation: {
-  //   addFarm: async(parent, {name, description, state, town, address, zip, website,}) => {
-  //     return await Farm.create({ name,description, state, town, address, zip, website});
-  //   }
-  // },
-    Mutation: {
+  Mutation: {
     addFarm: async(parent, {name, description, state, town, address, website, zip}) => {
       return await Farm.create(
         { 
@@ -73,21 +68,12 @@ const resolvers = {
           zip: zip
         });
     },
-
-
-    // example mutation from testing 
-    // mutation addFarm($name: String!) {
-    //   addFarm(name: $name) {
-    //     name
-    //   }
-    // }
-    // Query Variable
-    // {
-    //   "name": "JEDI"
-    // }
-
   
 // mutation to add users
+
+    addUser: async(parent, {name, email, password, state, town, address, zip}) => {
+      return await User.create({name, email, password, state, town, address, zip})
+    },
 
 // mutation to add items
 

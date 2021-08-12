@@ -82,3 +82,46 @@ Variables:
   "unit": "each",
   "farmID": "61151e7a7f1e4d0ea8b1b6dc"
 }
+
+
+mutation:
+
+mutation addNewUser(
+    $name: String!, 
+    $email: String!, 
+  	$password: String!,
+    $state: String, 
+    $town: String, 
+    $address: String, 
+    $zip:String!
+  ) {
+  addUser(
+    name: $name
+  	email: $email
+    password: $password
+    state: $state
+    town: $town
+    address: $address
+    zip: $zip
+  ) {
+  	_id
+  	name
+  	email
+    password
+    state
+    town
+    address
+    zip
+  }
+}
+
+query variables:
+{
+  "name": "Obi Wan Kanobi",
+  "email": "jedi@email.com",
+  "password": "password",
+  "state": "Corusant",
+  "town": "Jedi Temple",
+  "address": "1 jedi way",
+  "zip": "01545"
+}
