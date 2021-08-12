@@ -65,6 +65,37 @@ mutation addNewItem(
 }
 `;
 
+export const CREATE_USER = gql`
+mutation addNewUser(
+    $name: String!, 
+    $email: String!, 
+  	$password: String!,
+    $state: String, 
+    $town: String, 
+    $address: String, 
+    $zip:String!
+  ) {
+  addUser(
+    name: $name
+  	email: $email
+    password: $password
+    state: $state
+    town: $town
+    address: $address
+    zip: $zip
+  ) {
+  	_id
+  	name
+  	email
+    password
+    state
+    town
+    address
+    zip
+  }
+}
+`;
+
 export const UPDATE_FARM = gql`
 mutation updateOneFarm(
     $_id: ID!,
