@@ -85,10 +85,58 @@ const resolvers = {
         {new: true}
         ).populate('items')
       return updatedFarm
+    },
+
+    // mutation to update farms
+
+    updateFarm:  async(parent, {_id, name, description, state, town, address, website, zip}) => {
+      let originalItem = await Farm.findOne({ _id })
+      let updatedItem = originalItem
+      let edits
+      edits = false
+      if(originalItem.name !== name) {
+        updatedItem.name = name
+        edits = true
+      }
+      if(originalItem.description !== description) {
+        updatedItem.description = description
+        edits = true
+      }
+      if(originalItem.state !== state) {
+        updatedItem.state = state
+        edits = true
+      }
+      if(originalItem.town !== town) {
+        updatedItem.town = town
+        edits = true
+      }
+      if(originalItem.address !== address) {
+        updatedItem.address = address
+        edits = true
+      }
+      if(originalItem.website !== website) {
+        updatedItem.website = website
+        edits = true
+      }
+      if(originalItem.zip !== zip) {
+        updatedItem.zip = zip
+        edits = true
+      }
+      if(edits === true) {
+        updatedItem.__v++
+      }
+      await updatedItem.save()
+
+      return Farm.findOne({ _id }).populate('items')
     }
+
 },
 
-// mutation to update farms/users/item
+
+
+// mutation to update users
+
+// mutation to update items
 
 
     // By adding context to our query, we can retrieve the logged in user without specifically searching for them
