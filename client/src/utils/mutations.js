@@ -104,3 +104,27 @@ items {
 }
 }
 `;
+
+export const UPDATE_ITEM = gql`
+mutation updateOneItem(
+    $_id: ID!,
+$name: String, 
+$price: String, 
+$count: String, 
+$unit: String,
+) {
+updateItem(
+_id: $_id
+name: $name
+ price: $price
+count: $count
+unit: $unit
+) {
+_id
+name
+price
+count
+unit
+}
+}
+`;
