@@ -125,3 +125,55 @@ query variables:
   "address": "1 jedi way",
   "zip": "01545"
 }
+
+Mutation
+mutation updateOneFarm(
+  	$_id: ID!,
+    $name: String, 
+    $description: String, 
+    $state: String, 
+    $town: String, 
+    $address: String, 
+    $website: String, 
+    $zip:String
+  ) {
+  updateFarm(
+    _id: $_id
+    name: $name
+  	description: $description
+    state: $state
+    town: $town
+    address: $address
+    website: $website
+    zip: $zip
+  ) {
+  _id
+  name
+  description
+  state
+  town
+  address
+  website
+  zip
+  items {
+    _id
+    name
+    price
+    count
+    unit
+  }
+  }
+}
+
+query variables
+
+{
+  "_id": "61156e902fae6b563850c45b",
+  "name": "JEDI Farm2",
+  "description": "This is where padawans come and become jedi",
+  "state": "Corusant",
+  "town": "Jedi Temple",
+  "address": "1 jedi way",
+  "website": "starwars.com",
+  "zip": "01545"
+}

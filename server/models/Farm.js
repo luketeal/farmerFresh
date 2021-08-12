@@ -8,7 +8,7 @@ const FarmSchema = new Schema({
   state: String,
   town: String,
   address: String,
-  zip: Number,
+  zip: String,
   website: String,
   items: [
     {

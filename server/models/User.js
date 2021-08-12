@@ -10,7 +10,7 @@ const UserSchema = new Schema({
   state: String,
   town: String,
   address: String,
-  zip: Number,
+  zip: String,
   farms: [
     {
       type: Schema.Types.ObjectId,
