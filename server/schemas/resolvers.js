@@ -159,7 +159,9 @@ const resolvers = {
     }
 },
 
-// mutation to update farms/users/item
+// mutation to update users
+
+// mutation to update items
 
 
     // By adding context to our query, we can retrieve the logged in user without specifically searching for them
