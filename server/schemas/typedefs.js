@@ -53,11 +53,17 @@ type Query {
    type Mutation {
      
     
-     addFarm(name: String!): Farm
-    
+    addFarm(name: String!, description: String, state: String!, town: String!, address: String!, website: String!, zip: String!): Farm
+    addUser(): User
+    addItem(name: String!, price: String!, Count: String!, Unit: String!): Item
+    updateFarm(): Farm
+    updateUser(): User
+    updateItem(): Item
+    deleteFarm(): ???
+    deleteUser(): ???
+    deleteItem(): ???
 
-      addItem(name: String!, price: String!, Count: String!, Unit: String!): Item
-     }
+    }
 
  `;
 
