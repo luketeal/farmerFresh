@@ -91,8 +91,14 @@ const resolvers = {
 
 // mutation to add items
 
-    addItem: async(parent, {name, price, count, unit}) => {
-      return await Item.create({ name, price, count, unit});
+    addItem: async(parent, {name, price, count, unit, farmID}) => {
+      let newItem = await Item.create({ name, price, count, unit});
+      let updatedFarm = await Farm.findOneAndUpdate(
+        {_id: farmID},
+        {$addToSet: {items: newItem._id}},
+        {new: true}
+        ).populate('items')
+      return updatedFarm
     }
 },
 

@@ -55,7 +55,7 @@ type Query {
     
     addFarm(name: String!, description: String, state: String!, town: String!, address: String!, website: String!, zip: String!): Farm
 
-    addItem(name: String!, price: String!, Count: String!, Unit: String!): Item
+    addItem(name: String!, price: String!, count: String!, unit: String!, farmID: ID!): Farm
 
 
 
