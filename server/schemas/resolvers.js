@@ -3,7 +3,7 @@
 const { Farm, User, Item } = require('../models');
 const { populate } = require('../models/Farm');
 // const { signToken } = require('../utils/auth');
-const {getZips} = require('../utils/getZips');
+// const {getZips} = require('../utils/getZips');
 
 
 
@@ -61,12 +61,19 @@ const resolvers = {
   //   }
   // },
     Mutation: {
-    addFarm: async(parent, {name}) => {
+    addFarm: async(parent, {name, description, state, town, address, website, zip}) => {
       return await Farm.create(
         { 
-          name: name
+          name: name,
+          description: description, 
+          state: state, 
+          town: town, 
+          address: address, 
+          website: website, 
+          zip: zip
         });
     },
+
 
     // example mutation from testing 
     // mutation addFarm($name: String!) {

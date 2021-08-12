@@ -54,14 +54,10 @@ type Query {
      
     
     addFarm(name: String!, description: String, state: String!, town: String!, address: String!, website: String!, zip: String!): Farm
-    addUser(): User
+
     addItem(name: String!, price: String!, Count: String!, Unit: String!): Item
-    updateFarm(): Farm
-    updateUser(): User
-    updateItem(): Item
-    deleteFarm(): ???
-    deleteUser(): ???
-    deleteItem(): ???
+
+
 
     }
 
@@ -70,7 +66,13 @@ type Query {
 module.exports = typeDefs;
 
 // ---------------------------------------    addFarm(name: String!, email: String!, website: String, description: String!, state: String!, town: String!, address: String!, Zip: String): Farm
-    
+// addUser(): User 
+// updateFarm(): Farm
+// updateUser(): User
+// updateItem(): Item
+// deleteFarm(): ???
+// deleteUser(): ???
+// deleteItem(): ???
 
 // type Mutation {
 //     addUser(name: String!, email: String!, password: String!, state: String!,town: String!, address: String, Zip: Number ): Auth
