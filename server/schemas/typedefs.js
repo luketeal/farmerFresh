@@ -1,5 +1,6 @@
 const { gql } = require('apollo-server-express');
 
+// added password got user type def
 const typeDefs = gql`
 
 
@@ -8,6 +9,7 @@ type User{
         _id: ID
         name: String
         email: String
+        password: String
         state: String
         town: String
         address: String
