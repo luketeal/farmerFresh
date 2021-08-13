@@ -211,3 +211,22 @@ query variables
   "unit": "each"
 
 }
+
+Mutation
+mutation removeFarm($farmId: ID!) {
+  removeFarm(farmId: $farmId) {
+  _id
+  name
+  description
+  state
+  town
+  address
+  website
+  zip
+  }
+}`;
+
+QUERY Variables
+{
+  "farmId": "61132bdb3b00b8a5c859d253"
+}

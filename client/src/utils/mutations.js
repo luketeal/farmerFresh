@@ -159,3 +159,17 @@ unit
 }
 }
 `;
+
+export const REMOVE_FARM = gql`
+mutation removeFarm($farmId: ID!) {
+  removeFarm(farmId: $farmId) {
+  _id
+  name
+  description
+  state
+  town
+  address
+  website
+  zip
+  }
+}`;

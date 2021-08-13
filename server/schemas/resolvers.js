@@ -156,7 +156,19 @@ const resolvers = {
       }
 
       return await updatedItem.save()
-    }
+    },
+
+    removeFarm: async (parent, { farmId }) => {
+      return Farm.findOneAndDelete({ _id: farmId });
+    },
+
+    // removeSkill: async (parent, { profileId, skill }) => {
+    //   return Profile.findOneAndUpdate(
+    //     { _id: profileId },
+    //     { $pull: { skills: skill } },
+    //     { new: true }
+    //   );
+    // },
 },
 
 // mutation to update users
