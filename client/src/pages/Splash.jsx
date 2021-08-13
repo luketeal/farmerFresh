@@ -2,9 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { TextField } from '@material-ui/core';
-import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -53,17 +51,7 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1, 1.5),
     },
     heroContent: {
-        padding: theme.spacing(8, 0, 6),
-    },
-    cardHeader: {
-        backgroundColor:
-            theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[700],
-    },
-    cardPricing: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'baseline',
-        marginBottom: theme.spacing(2),
+        padding: theme.spacing(25, 0, 6),
     },
     footer: {
         borderTop: `1px solid ${theme.palette.divider}`,
@@ -79,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
         background: 'linear-gradient(to right, #FF8008 0%, #FFC837  51%, #FF8008  100%)',
         borderRadius: 3,
         border: 0,
-        color: 'white',
+        color: 'black',
         height: 48,
         padding: '0 30px',
         boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
@@ -97,23 +85,7 @@ export default function Pricing() {
     return (
         <React.Fragment>
             <CssBaseline />
-            <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
-                <Toolbar className={classes.toolbar}>
-                    <img src="https://img.icons8.com/cotton/50/000000/farm-with-silo--v2.png" />
-                    Logo here
-                    <Typography variant="h6" color="inherit" className={classes.toolbarTitle}>
-                        Farmer Fresh Marketplace Logo
-                    </Typography>
-                    <nav>
-                        <Link variant="button" color="textPrimary" href="#" className={classes.link}>
-                            Cart
-                        </Link>
-                    </nav>
-                    <Button href="#" color="primary" variant="outlined" className={classes.link}>
-                        Farmer Portal
-                    </Button>
-                </Toolbar>
-            </AppBar>
+
 
 
             {/* Hero unit */}
@@ -129,7 +101,7 @@ export default function Pricing() {
                     <TextField id="outlined-basic" label="Enter zip code" variant="outlined" className={classes.searchBar} />
                 </div>
                 <div>
-                    <Button variant="contained" color="primary" className={classes.searchBtn} >
+                    <Button href="./farmresults" variant="contained" color="primary" className={classes.searchBtn} >
                         Search
                     </Button>
                 </div>

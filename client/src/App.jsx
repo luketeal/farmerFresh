@@ -5,6 +5,8 @@ import Splash from './pages/Splash'
 import Testimonial from './pages/Testimonials';
 import Signin from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import FarmResults from './pages/FarmResults';
+import FarmerDash from './pages/FarmerDash';
 // import Footer from './components/Footer/Footer';
 
 //how should we handle splash... 
@@ -12,19 +14,25 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Header/>
-          <div className="app-container">
-            <Route exact path="/">
-              <Splash />
-            </Route>
-            <Route exact path="/login">
-              <Signin />
-            </Route>
-            <Route exact path="/signup">
-              <SignUp />
-            </Route>
-          </div>
-        <Testimonial/>
+        <Header />
+        <div className="app-container">
+          <Route exact path="/">
+            <Splash />
+          </Route>
+          <Route exact path="/signin">
+            <Signin />
+          </Route>
+          <Route exact path="/signup">
+            <SignUp />
+          </Route>
+          <Route exact path="/farmresults">
+            <FarmResults />
+          </Route>
+          <Route exact path="/farmerdash">
+            <FarmerDash />
+          </Route>
+        </div>
+        <Testimonial />
 
       </div>
     </Router>
