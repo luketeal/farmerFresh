@@ -1,8 +1,8 @@
-// const { AuthenticationError } = require('apollo-server-express');
+const { AuthenticationError } = require('apollo-server-express');
 
 const { Farm, User, Item } = require('../models');
 const { populate } = require('../models/Farm');
-// const { signToken } = require('../utils/auth');
+const { signToken } = require('../utils/auth');
 // const {getZips} = require('../utils/getZips');
 
 
@@ -72,7 +72,10 @@ const resolvers = {
 // mutation to add users
 
     addUser: async(parent, {name, email, password, state, town, address, zip}) => {
-      return await User.create({name, email, password, state, town, address, zip})
+      const user = await User.create({name, email, password, state, town, address, zip}); // changed return user into a variable assignment
+      const token = signToken(user); // added token variable be assigned the sign token
+      console.log(token);
+      return {token, user}; // changed return statement to return the user and the token.
     },
 
 // mutation to add items
