@@ -56,7 +56,8 @@ type Mutation {
     
     addFarm(name: String!, description: String, state: String!, town: String!, address: String!, website: String!, zip: String!): Farm
     addItem(name: String!, price: String!, count: String!, unit: String!, farmID: ID!): Farm
-    addUser(name: String!, email: String!, password: String!, state: String, town: String, address: String, zip: String): User
+    addUser(name: String!, email: String!, password: String!, state: String, town: String, address: String, zip: String): Auth
+    login(email: String!, password: String!): Auth
     updateFarm(_id: ID!, name: String, description: String, state: String, town: String, address: String, website: String, zip: String): Farm
     updateItem(_id: ID!, name: String, price: String, count: String, unit: String): Item
     removeFarm(farmId: ID!): Farm
@@ -68,6 +69,16 @@ type Mutation {
  `;
 
 module.exports = typeDefs;
+
+
+
+
+
+//8/14/21 -----  Added login to type def and  changed User to Auth for add user.
+
+
+
+
 
 // ---------------------------------------    addFarm(name: String!, email: String!, website: String, description: String!, state: String!, town: String!, address: String!, Zip: String): Farm
 // addUser(): User 
