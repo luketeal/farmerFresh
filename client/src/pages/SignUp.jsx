@@ -26,7 +26,7 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(25),
+    marginTop: theme.spacing(5),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -41,6 +41,14 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    background: '#F50057',
+    borderRadius: 10,
+    border: 0,
+    color: 'white',
+    height: 48,
+    padding: '15px 45px',
+    boxShadow: '5 0 20px #eee',
+    marginTop: theme.spacing(3),
   },
 }));
 

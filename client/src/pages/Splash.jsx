@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
+import Avatar from '@material-ui/core/Avatar';
+import ExploreRoundedIcon from '@material-ui/icons/ExploreRounded';
 
 // import Card from '@material-ui/core/Card';
 // import CardActions from '@material-ui/core/CardActions';
@@ -16,19 +18,6 @@ import Box from '@material-ui/core/Box';
 // import StarIcon from '@material-ui/icons/StarBorder';
 
 
-// function for footer copyright
-function Copyright() {
-    return (
-        <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
-                Farmer Fresh Marketplace
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
 
 const useStyles = makeStyles((theme) => ({
     '@global': {
@@ -38,39 +27,29 @@ const useStyles = makeStyles((theme) => ({
             listStyle: 'none',
         },
     },
-    appBar: {
-        borderBottom: `1px solid ${theme.palette.divider}`,
-    },
-    toolbar: {
-        flexWrap: 'wrap',
-    },
-    toolbarTitle: {
-        flexGrow: 1,
-    },
-    link: {
-        margin: theme.spacing(1, 1.5),
+    avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
     },
     heroContent: {
-        padding: theme.spacing(25, 0, 6),
+        padding: theme.spacing(3, 0, 6),
     },
-    footer: {
-        borderTop: `1px solid ${theme.palette.divider}`,
-        marginTop: theme.spacing(8),
-        paddingTop: theme.spacing(3),
-        paddingBottom: theme.spacing(3),
-        [theme.breakpoints.up('sm')]: {
-            paddingTop: theme.spacing(6),
-            paddingBottom: theme.spacing(6),
-        },
+    heroBox: {
+        display: 'flex',
+        borderRadius: 10,
+        marginTop: theme.spacing(5),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
     },
     searchBtn: {
-        background: 'linear-gradient(to right, #FF8008 0%, #FFC837  51%, #FF8008  100%)',
-        borderRadius: 3,
+        background: '#F50057',
+        borderRadius: 10,
         border: 0,
-        color: 'black',
+        color: 'white',
         height: 48,
-        padding: '0 30px',
-        boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+        padding: '15px 45px',
+        boxShadow: '5 0 20px #eee',
         marginTop: theme.spacing(3),
     },
     searchBar: {
@@ -87,35 +66,36 @@ export default function Pricing() {
             <CssBaseline />
 
 
+            <Box className={classes.heroBox}>
+                <Avatar className={classes.avatar}>
+                    <ExploreRoundedIcon />
+                </Avatar>
 
-            {/* Hero unit */}
-            <Container maxWidth="sm" component="main" className={classes.heroContent}>
-                <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-                    Find a farm-to-table community near you
-                </Typography>
-                <Typography variant="h5" align="center" color="textSecondary" component="p">
-                    Search for fresh produce in your area
-                </Typography>
+                {/* Hero unit */}
+                <Container maxWidth="sm" component="main" className={classes.heroContent}>
 
-                <div>
-                    <TextField id="outlined-basic" label="Enter zip code" variant="outlined" className={classes.searchBar} />
-                </div>
-                <div>
-                    <Button href="./farmresults" variant="contained" color="primary" className={classes.searchBtn} >
-                        Search
-                    </Button>
-                </div>
+                    <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+                        Find a farming community now
+                    </Typography>
+                    <Typography variant="h5" align="center" color="textSecondary" component="p">
+                        Search for fresh produce in near you
+                    </Typography>
 
-            </Container>
-            {/* End hero unit */}
+                    <div>
+                        <TextField id="outlined-basic" label="Enter zip code" variant="outlined" className={classes.searchBar} />
+                    </div>
+                    <div>
+                        <Button href="./farmresults" variant="contained" color="neutral" className={classes.searchBtn} >
+                            Search
+                        </Button>
+                    </div>
 
-            {/* Footer */}
-            <Container maxWidth="md" component="footer" className={classes.footer}>
-                <Box mt={5}>
-                    <Copyright />
-                </Box>
-            </Container>
-            {/* End footer */}
+                </Container>
+                {/* End hero unit */}
+
+            </Box>
+
+
         </React.Fragment>
     );
 }

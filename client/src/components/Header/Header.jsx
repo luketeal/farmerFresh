@@ -6,6 +6,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+// import logo from './assets/logo/droopLeafV1.png';
 
 const useStyles = makeStyles((theme) => ({
     '@global': {
@@ -15,24 +16,41 @@ const useStyles = makeStyles((theme) => ({
             listStyle: 'none',
         },
     },
-    appBar: {
-        borderBottom: `1px solid ${theme.palette.divider}`,
-    },
     toolbar: {
         flexWrap: 'wrap',
     },
+    cartBtn: {
+        flexGrow: 1,
+        background: '#FAB617',
+        borderRadius: 10,
+        border: 0,
+        color: 'black',
+        height: 38,
+        padding: '15px 45px',
+        boxShadow: '5 0 20px #eee',
+        marginTop: -40,
+
+    },
+    portalBtn: {
+        margin: theme.spacing(0, 1.5),
+        background: '#FAB617',
+        borderRadius: 10,
+        border: 0,
+        color: 'black',
+        height: 38,
+        padding: '15px 45px',
+        boxShadow: '5 0 20px #eee',
+        marginTop: -40,
+
+    },
     toolbarTitle: {
+        display: 'flex',
         flexGrow: 1,
     },
-    link: {
-        margin: theme.spacing(1, 1.5),
-    },
-    heroContent: {
-        padding: theme.spacing(25, 0, 6),
-    },
-    cardHeader: {
-        backgroundColor:
-            theme.palette.type === 'transparent' ? theme.palette.grey[200] : theme.palette.grey[700],
+    logo: {
+        display: 'flex',
+        marginTop: 20,
+        marginBottom: 20,
     },
 }));
 
@@ -40,22 +58,25 @@ const useStyles = makeStyles((theme) => ({
 export default function Header() {
     const classes = useStyles();
     return (
-        <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
+        <AppBar position="static" color="transparent" elevation={0}>
             <Toolbar className={classes.toolbar}>
 
-                <Link component="button" variant="primary" href="./#">
-                    <img src="https://img.icons8.com/cotton/50/000000/farm-with-silo--v2.png" />
-                </Link>
+                {/* need to figure out why local source not working for images*/}
+                <div className={classes.logo}>
+                    <img src="https://raw.githubusercontent.com/luketeal/farmerFresh/main/assets/logo/droopLeafV1.png" />
+                </div>
+
 
                 <Typography variant="h6" color="inherit" className={classes.toolbarTitle}>
-                    Farmer Fresh Marketplace Logo
+                    {/* <img src={logo} alt="logo" /> */}
                 </Typography>
+
                 <nav>
-                    <Button href="#" color="primary" variant="outlined" className={classes.link}>
+                    <Button href="#" color="neutral" variant="contained" className={classes.cartBtn}>
                         Cart
                     </Button>
                 </nav>
-                <Button href="./farmerdash" color="primary" variant="outlined" className={classes.link}>
+                <Button href="./farmerdash" color="neutral" variant="contained" className={classes.portalBtn}>
                     Farmer Portal
                 </Button>
             </Toolbar>

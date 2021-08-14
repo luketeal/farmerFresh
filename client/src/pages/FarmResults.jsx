@@ -14,15 +14,25 @@ import AppBar from '@material-ui/core/AppBar';
 
 
 const useStyles = makeStyles((theme) => ({
-    icon: {
-        marginRight: theme.spacing(2),
+
+    mainContent: {
+        overflow: 'auto',
     },
     heroContent: {
-        marginTop: theme.spacing(25),
+        marginTop: 10,
         padding: theme.spacing(8, 0, 6),
     },
     heroButtons: {
         marginTop: theme.spacing(4),
+    },
+    searchBtn: {
+        background: '#F50057',
+        borderRadius: 10,
+        border: 0,
+        color: 'white',
+        height: 48,
+        padding: '15px 45px',
+        boxShadow: '5 0 20px #eee',
     },
     cardGrid: {
         paddingTop: theme.spacing(8),
@@ -50,7 +60,7 @@ export default function Album() {
         <React.Fragment>
             <CssBaseline />
 
-            <main>
+            <main className={classes.mainContent}>
                 <Container maxWidth="sm" className={classes.heroContent}>
                     <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
                         Farms near You
@@ -61,7 +71,7 @@ export default function Album() {
                     <div className={classes.heroButtons}>
                         <Grid container spacing={2} justifyContent="center">
                             <Grid item>
-                                <Button href="./#" variant="contained" color="primary">
+                                <Button href="./#" variant="contained" color="neutral" className={classes.searchBtn}>
                                     Back to search
                                 </Button>
                             </Grid>
@@ -88,7 +98,7 @@ export default function Album() {
                                         </Typography>
                                     </CardContent>
                                     <CardActions>
-                                        <Button size="small" color="primary" variant="outlined">
+                                        <Button size="small" color="secondary" variant="outlined">
                                             View
                                         </Button>
                                     </CardActions>
