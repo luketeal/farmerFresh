@@ -8,10 +8,18 @@ import SignUp from './pages/SignUp';
 import FarmResults from './pages/FarmResults';
 import FarmerDash from './pages/FarmerDash';
 import Footer from './components/Footer/Footer';
+import TestPage from './pages/TestPage';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+
+const client = new ApolloClient({
+  uri: '/graphql',
+  cache: new InMemoryCache(),
+});
 
 //how should we handle splash... 
 function App() {
   return (
+    <ApolloProvider client={client}>
     <Router>
       <div className="App">
         <Header />
@@ -31,11 +39,15 @@ function App() {
           <Route exact path="/farmerdash">
             <FarmerDash />
           </Route>
+          <Route exact path="/testpage">
+            <TestPage/>
+          </Route>
         </div>
         <Footer />
 
       </div>
     </Router>
+    </ApolloProvider>
     // <SignUp></SignUp>
   );
 }

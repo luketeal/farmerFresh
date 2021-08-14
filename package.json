@@ -18,6 +18,7 @@
     "sass": "^1.37.5"
   },
   "dependencies": {
+    "@apollo/client": "^3.4.7",
     "graphql": "^15.5.1",
     "mongod": "^2.0.0"
   }
