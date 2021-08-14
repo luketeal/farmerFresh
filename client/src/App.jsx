@@ -8,6 +8,7 @@ import SignUp from './pages/SignUp';
 import FarmResults from './pages/FarmResults';
 import FarmerDash from './pages/FarmerDash';
 import Footer from './components/Footer/Footer';
+import FarmVeggieResults from './pages/FarmVeggieResults';
 
 //how should we handle splash... 
 function App() {
@@ -30,6 +31,9 @@ function App() {
           </Route>
           <Route exact path="/farmerdash">
             <FarmerDash />
+          </Route>
+          <Route exact path="/farmveggieresults">
+            <FarmVeggieResults />
           </Route>
         </div>
         <Footer />
