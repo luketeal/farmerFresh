@@ -89,6 +89,24 @@ const resolvers = {
       return {token, user};            // changed return statement to return the user and the token.
 
     },
+    
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });      // need to check if we want login to be email or a username.
+
+      if (!user) {
+        throw new AuthenticationError('No user found with this email address');
+      }
+
+      const correctPw = await user.isCorrectPassword(password);
+
+      if (!correctPw) {
+        throw new AuthenticationError('Incorrect credentials');
+      }
+
+      const token = signToken(user);
+
+      return { token, user };
+    },
 
     // mutation to add items
 
@@ -197,8 +215,8 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    removeItem: async (parent, { farmId, itemId }) => {
-
+    removeItem: async (parent, { farmId, itemId }, context) => {
+      if (context.user) {
       let deletedItem = await Item.findOneAndDelete({ _id: itemId });
       await Farm.findOneAndUpdate(
         { _id: farmId },
@@ -206,11 +224,15 @@ const resolvers = {
         { new: true }
       )
       return deletedItem
-
+      }
+      throw new AuthenticationError('You need to be logged in!');  // auth throw
     },
 
-    removeUser: async (parent, { userId}) => {
+    removeUser: async (parent, { userId}, context) => {    // added context for auth
+      if (context.user) {
       return User.findOneAndDelete({_id: userId})
+      }
+      throw new AuthenticationError('You need to be logged in!'); // auth throw
     }
 
     // removeSkill: async (parent, { profileId, skill }) => {
@@ -241,4 +263,19 @@ const resolvers = {
 module.exports = resolvers;
 
 
+
+
+
+
+// delete users  will delete fars 
+
+// delete farms will delete items 
+
+// set up login 
+
+
+// query using ID context
+
+
+//delete queries 
 
