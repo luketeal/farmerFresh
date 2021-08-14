@@ -8,6 +8,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
+import GitHubIcon from '@material-ui/icons/GitHub';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import TwitterIcon from '@material-ui/icons/Twitter';
 
 
 
@@ -52,9 +55,7 @@ export default function Footer() {
         <div>
             {/* Footer */}
             <Container maxWidth="md" component="footer" className={classes.footer}>
-                <Box mt={2}>
-                    <Copyright />
-                </Box>
+                <Copyright />
             </Container>
             {/* End footer */}
         </div>

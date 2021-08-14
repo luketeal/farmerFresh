@@ -86,7 +86,7 @@ export default function Album() {
                                 <Card className={classes.card}>
                                     <CardMedia
                                         className={classes.cardMedia}
-                                        image="https://source.unsplash.com/random"
+                                        image="https://images.unsplash.com/photo-1613061521413-d01a2539a364?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80"
                                         title="Image title"
                                     />
                                     <CardContent className={classes.cardContent}>
@@ -94,11 +94,18 @@ export default function Album() {
                                             Farm name
                                         </Typography>
                                         <Typography>
-                                            About farm. It has an address and the view button takes you to their page of veggies
+                                            <ul>
+                                                <li>
+                                                    About farm.
+                                                </li>
+                                                <li>
+                                                    Some inspiring thing maybe
+                                                </li>
+                                            </ul>
                                         </Typography>
                                     </CardContent>
                                     <CardActions>
-                                        <Button size="small" color="secondary" variant="outlined">
+                                        <Button href="./FarmVeggieResults" size="small" color="secondary" variant="outlined">
                                             View
                                         </Button>
                                     </CardActions>
