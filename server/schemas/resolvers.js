@@ -223,19 +223,3 @@ module.exports = resolvers;
 
 
 
-// add profiles
-
-// addFarm: async(parent, {name, description, state, town, address, website, zip}, context) => {
-      
-//   return await Farm.create(
-//     { 
-//       name: name,
-//       description: description, 
-//       state: state, 
-//       town: town, 
-//       address: address, 
-//       website: website, 
-//       zip: zip
-//     });
- 
-// },
