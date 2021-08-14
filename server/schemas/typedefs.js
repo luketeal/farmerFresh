@@ -38,6 +38,11 @@ type Item{
     count: String
     unit: String
 }
+
+type Auth {
+    token: ID!
+    user: User
+  }
  
      
 type Query {
