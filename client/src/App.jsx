@@ -7,7 +7,7 @@ import Signin from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import FarmResults from './pages/FarmResults';
 import FarmerDash from './pages/FarmerDash';
-// import Footer from './components/Footer/Footer';
+import Footer from './components/Footer/Footer';
 
 //how should we handle splash... 
 function App() {
@@ -32,7 +32,7 @@ function App() {
             <FarmerDash />
           </Route>
         </div>
-        <Testimonial />
+        <Footer />
 
       </div>
     </Router>
