@@ -56,9 +56,12 @@ const resolvers = {
 
   // mutation to add farms
   Mutation: {
-    addFarm: async (parent, { name, description, state, town, address, website, zip }) => {
-      return await Farm.create(
-        {
+  
+    addFarm: async(parent, {name, description, state, town, address, website, zip}, context) => {  // added context.
+      
+      if (context.user) {
+      let newFarm = await Farm.create(  // changed return farm into variable newFarm. 
+        { 
           name: name,
           description: description,
           state: state,
@@ -67,32 +70,51 @@ const resolvers = {
           website: website,
           zip: zip
         });
+        let updatedUser = await User.findOneAndUpdate(     // created updated user variable  to find a user from context.
+          {_id: context.user._id},                    // attempting to find user based on the context user object.
+          {$addToSet: {farms: newFarm._id}},   // attempting to set the farm to user id.
+          {new: true}
+          ).populate('farms') // populating the farms array.
+
+          return updatedUser    // returning updated user 
+        }
+        throw new AuthenticationError('You need to be logged in!');
+        
     },
 
-    // mutation to add users
-
-    addUser: async (parent, { name, email, password, state, town, address, zip }) => {
-      const user = await User.create({ name, email, password, state, town, address, zip }); // changed return user into a variable assignment
-      const token = signToken(user); // added token variable be assigned the sign token
+    addUser: async(parent, {name, email, password, state, town, address, zip}) => {
+      const user = await User.create({name, email, password, state, town, address, zip}); // changed return user into a variable assignment
+      const token = signToken(user);        // added token variable be assigned the sign token
       console.log(token);
-      return { token, user }; // changed return statement to return the user and the token.
+      return {token, user};            // changed return statement to return the user and the token.
+
     },
 
     // mutation to add items
 
-    addItem: async (parent, { name, price, count, unit, farmID }) => {
-      let newItem = await Item.create({ name, price, count, unit });
+
+    addItem: async(parent, {name, price, count, unit, farmID}, context) => { // added context
+
+      if (context.user) {
+      let newItem = await Item.create({ name, price, count, unit});
       let updatedFarm = await Farm.findOneAndUpdate(
         { _id: farmID },
         { $addToSet: { items: newItem._id } },
         { new: true }
       ).populate('items')
       return updatedFarm
+      
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
 
     // mutation to update farms
 
-    updateFarm: async (parent, { _id, name, description, state, town, address, website, zip }) => {
+
+    updateFarm:  async(parent, {_id, name, description, state, town, address, website, zip}, context) => {  // added context
+
+      if (context.user) {
+
       let originalFarm = await Farm.findOne({ _id })
       let updatedFarm = originalFarm
       let edits
@@ -131,9 +153,14 @@ const resolvers = {
       await updatedFarm.save()
 
       return Farm.findOne({ _id }).populate('items')
+    }
+    throw new AuthenticationError('You need to be logged in!');
     },
 
-    updateItem: async (parent, { _id, name, price, count, unit }) => {
+    updateItem:  async(parent, {_id, name, price, count, unit}, context) => {
+
+      if (context.user) {
+
       let originalItem = await Item.findOne({ _id })
       let updatedItem = originalItem
       let edits
@@ -159,10 +186,15 @@ const resolvers = {
       }
 
       return await updatedItem.save()
+    }
+
     },
 
-    removeFarm: async (parent, { farmId }) => {
+    removeFarm: async (parent, { farmId }, context) => { // added context for auth. 
+      if (context.user) {
       return Farm.findOneAndDelete({ _id: farmId });
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
 
     removeItem: async (parent, { farmId, itemId }) => {
@@ -209,6 +241,4 @@ const resolvers = {
 module.exports = resolvers;
 
 
-
-// add profiles
 
