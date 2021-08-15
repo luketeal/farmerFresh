@@ -23,9 +23,9 @@ query allFarmsByZip($zip: [String!]) {
 `;
 
 export const ALL_FARMS = gql`
-query allFarms() {
-farms {
-  zip
+query {
+  farms {
+  state
 }
 
 }
