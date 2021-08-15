@@ -13,6 +13,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import { ALL_FARMS } from '../utils/queries';
+import { useQuery } from '@apollo/client';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -55,17 +57,30 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
         display: 'flex',
     },
+    linkStyle: {
+        margin: "1rem",
+        textDecoration: "none",
+        color: 'blue'
+    }
 }));
 
 
 export default function Pricing() {
     const classes = useStyles();
-
     const [zipcode, setZipcode] = React.useState('');
-
     const handleChange = (event) => {
         setZipcode(event.target.value);
     };
+
+
+    const { loading, error, data } = useQuery(ALL_FARMS);
+    console.log(data)
+
+    if (loading) return 'Loading...';
+    if (error) return `Error! ${error.message}`;
+    const farms = data?.farms || [];
+    console.log(farms)
+
 
     return (
         <React.Fragment>
@@ -87,19 +102,16 @@ export default function Pricing() {
 
 
                     <FormControl variant="filled" className={classes.formControl}>
-                        <InputLabel id="demo-simple-select-filled-label">Farms at these zipcodes</InputLabel>
+                        <InputLabel id="demo-simple-select-filled-label">Farms at these states</InputLabel>
                         <Select
                             labelId="select-filled-label"
                             id="select-filled"
                             value={zipcode}
                             onChange={handleChange}
                         >
-                            <MenuItem value="">
-                                <em>None</em>
-                            </MenuItem>
-                            <MenuItem value={10}>Superfarm</MenuItem>
-                            <MenuItem value={20}>Megafarm</MenuItem>
-                            <MenuItem value={30}>UltraFarm</MenuItem>
+                            {
+                                farms.map(farm => <MenuItem value={farm.state}>{farm.state}</MenuItem>)
+                            }
                         </Select>
                     </FormControl>
 
@@ -107,6 +119,26 @@ export default function Pricing() {
                         <Button href="./farmresults" variant="contained" color="neutral" className={classes.searchBtn} >
                             Search
                         </Button>
+
+
+
+                        {/* Idk what to do */}
+                        {/* <Link color="inherit"
+                            to={{
+                                pathname: "./farmresults",
+                                state: {
+                                    farmState: zipcode
+                                }
+                            }}>
+                            <Button href="./farmresults" variant="contained" color="neutral" className={classes.searchBtn} >
+                                Search
+                            </Button>
+                        </Link> */}
+
+
+
+
+
                     </div>
 
                 </Container>
