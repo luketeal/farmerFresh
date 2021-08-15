@@ -22,6 +22,78 @@
       "price": "1",
       "unit": "lb",
       "count": "40"
+    },
+    {
+      "name": "lettuce",
+      "price": "1.00",
+      "unit": "ea",
+      "count": "30"
+    },
+    {
+      "name": "broccoli",
+      "price": "0.50",
+      "unit": "ea",
+      "count": "40"
+    },
+    {
+      "name": "blue berries",
+      "price": "1.50",
+      "unit": "ea",
+      "count": "20"
+    },
+    {
+      "name": "Green Grapes",
+      "price": "1",
+      "unit": "lb",
+      "count": "40"
+    },
+    {
+      "name": "Apple",
+      "price": "1.00",
+      "unit": "ea",
+      "count": "30"
+    },
+    {
+      "name": "Orange",
+      "price": "0.50",
+      "unit": "ea",
+      "count": "40"
+    },
+    {
+      "name": "Rasberry",
+      "price": "1.50",
+      "unit": "ea",
+      "count": "20"
+    },
+    {
+      "name": "Banna",
+      "price": "1",
+      "unit": "lb",
+      "count": "40"
+    },
+    {
+      "name": "Green Apple",
+      "price": "1.00",
+      "unit": "ea",
+      "count": "30"
+    },
+    {
+      "name": "Onions",
+      "price": "0.50",
+      "unit": "ea",
+      "count": "40"
+    },
+    {
+      "name": "Corn",
+      "price": "1.50",
+      "unit": "ea",
+      "count": "20"
+    },
+    {
+      "name": "Potatos",
+      "price": "1",
+      "unit": "lb",
+      "count": "40"
     }
 ]
   

@@ -63,7 +63,10 @@ export default function Header() {
 
                 {/* need to figure out why local source not working for images*/}
                 <div className={classes.logo}>
+                    <Link to="/">
                     <img src="https://raw.githubusercontent.com/luketeal/farmerFresh/main/assets/logo/droopLeafV1.png" />
+                    </Link>
+                    
                 </div>
 
 

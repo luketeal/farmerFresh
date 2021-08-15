@@ -230,3 +230,23 @@ QUERY Variables
 {
   "farmId": "61132bdb3b00b8a5c859d253"
 }
+
+deleteItem mutation
+
+
+mutation removeoneItem($farmId: ID!, $itemId: ID!) {
+  removeItem(farmId: $farmId,itemId: $itemId) {
+  _id
+  name
+  price
+	count
+	unit
+  }
+}
+
+query variables
+{
+  "farmId": "6117d7fcfa16983d88d7e793",
+  "itemId": "6117d7fcfa16983d88d7e799"
+  
+}
