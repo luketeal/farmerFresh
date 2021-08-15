@@ -30,3 +30,26 @@ query {
 
 }
 `;
+
+export const FARMS_BY_STATE = gql `
+query allFarmsByState($state: String!) {
+  farmsByState(state: $state) {
+    _id
+    name
+    description
+    state
+    town
+    address
+    website
+    zip
+    items {
+      _id
+      name
+      price
+      count
+      unit
+    }
+  }
+}
+
+`

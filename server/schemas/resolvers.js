@@ -23,6 +23,10 @@ const resolvers = {
       return Farm.find({ zip }).populate('items');
     },
 
+    farmsByState: async (parent, { state }) => {
+      return Farm.find({ state }).populate('items');
+    },
+
     // query for farms based on farmer
     // farms: async (parent, { name }) => {
     //     return Farm.findOne({ name }).populate({
