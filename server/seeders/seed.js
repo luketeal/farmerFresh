@@ -25,10 +25,15 @@ db.once('open', async () => {
     // console.log(tempUser);
 
     // randomly add a professor to each class
-    const tempItem = items[Math.floor(Math.random() * items.length)];
-    newFarm.items.push(tempItem._id);
-    await newFarm.save();
 
+
+  }
+
+  for (newItem of items) {
+
+    const tempFarm = farms[Math.floor(Math.random() * farms.length)];
+    tempFarm.items.push(newItem._id);
+    await tempFarm.save();
   }
 
   console.log('all done!');
