@@ -50,9 +50,9 @@ type Query {
     farm(zip: String!): Farm
     farms: [Farm]
     farmsByZip (zip: [String!]): [Farm]
-    user(name: String!): User
+    user(_id: String!): User
     users: [User]
-    item(name: String!): Item
+    item(_id: String!): Item
     items: [Item]
 }
    
