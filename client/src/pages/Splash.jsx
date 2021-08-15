@@ -65,6 +65,12 @@ export default function Pricing() {
         setZipcode(event.target.value);
     };
 
+    const [zipcode, setZipcode] = React.useState('');
+
+    const handleChange = (event) => {
+        setZipcode(event.target.value);
+    };
+
     return (
         <React.Fragment>
             <CssBaseline />
@@ -113,3 +119,4 @@ export default function Pricing() {
         </React.Fragment>
     );
 }
+
