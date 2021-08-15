@@ -60,9 +60,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Pricing() {
     const classes = useStyles();
-
     const [zipcode, setZipcode] = React.useState('');
-
     const handleChange = (event) => {
         setZipcode(event.target.value);
     };
