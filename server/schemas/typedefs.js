@@ -54,6 +54,7 @@ type Query {
     users: [User]
     item(_id: String!): Item
     items: [Item]
+    farmsByState (state: String!): [Farm]
 }
    
   
