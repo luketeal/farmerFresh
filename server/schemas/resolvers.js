@@ -38,15 +38,15 @@ const resolvers = {
       return User.find();
     },
 
-    user: async (parent, { name }) => {
-      return User.findOne({ name }).populate('farms').populate({
+    user: async (parent, { _id}) => {
+      return User.findOne({ _id }).populate('farms').populate({
         path: 'farms',
         populate: 'items'
       })
     },
 
-    item: async (parent, { name }) => {
-      return Item.findOne({ name });
+    item: async (parent, { _id }) => {
+      return Item.findOne({ _id });
     },
     // query for items based on farms
     items: async (parent, args) => {
@@ -267,15 +267,34 @@ module.exports = resolvers;
 
 
 
-// delete users  will delete fars 
+// delete users  will delete farms 
 
 // delete farms will delete items 
 
-// set up login 
-
-
-// query using ID context
 
 
 //delete queries 
 
+// -----------------------------  The mess of code that I have already tried and failed -----------------------------------------------------
+
+// removeFarm: async (parent, { farmId }, ) => { // added context for auth. 
+  //   // if (context.user) {
+  //     let findFarm = await Farm.findOne({_id: farmId});
+  
+  //     console.log(findFarm);
+  //     //   {_id: farmI})
+  //     //   console.log(findFarm.items);
+  //     // let deletedFarm = Farm.findOneAndDelete({ _id: farmId }) ;
+    
+  //     // console.log(deleteItems);
+  //     // }
+  
+  //     // return deletedFarm;
+  
+  // // }
+  //   // throw new AuthenticationError('You need to be logged in!');
+  //   return findFarm;
+  
+  // },
+
+  // ----------------------------------------------------------------------------------------------------------------------------
