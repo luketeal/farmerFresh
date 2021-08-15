@@ -15,7 +15,6 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
 
-
 const useStyles = makeStyles((theme) => ({
     '@global': {
         ul: {
@@ -112,10 +111,7 @@ export default function Pricing() {
 
                 </Container>
                 {/* End hero unit */}
-
             </Box>
-
-
         </React.Fragment>
     );
 }
