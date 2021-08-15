@@ -8,7 +8,7 @@ import SignUp from './pages/SignUp';
 import FarmResults from './pages/FarmResults';
 import FarmerDash from './pages/FarmerDash';
 import Footer from './components/Footer/Footer';
-
+import FarmVeggieResults from './pages/FarmVeggieResults';
 import TestPage from './pages/TestPage';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
@@ -17,7 +17,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-import FarmVeggieResults from './pages/FarmVeggieResults';
+
 
 
 //how should we handle splash... 

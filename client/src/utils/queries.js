@@ -21,3 +21,12 @@ query allFarmsByZip($zip: [String!]) {
     }
   }
 `;
+
+export const ALL_FARMS = gql`
+query {
+  farms {
+  state
+}
+
+}
+`;
