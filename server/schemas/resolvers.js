@@ -212,12 +212,22 @@ const resolvers = {
 
     },
 
-    removeFarm: async (parent, { farmId }, context) => { // added context for auth. 
-      if (context.user) {
-      return Farm.findOneAndDelete({ _id: farmId });
+    removeFarm: async (parent, { farmId }, ) => { // added context for auth. context
+      // if (context.user) {
+      let deletedFarmItems = await Farm.findOne({ _id: farmId });
+      let itemArray = deletedFarmItems.items;
+      for (deleteItem of itemArray) {
+        let deletedItem = await Item.findOneAndDelete({_id: deleteItem })
+        
       }
-      throw new AuthenticationError('You need to be logged in!');
+      let deletedFarm = Farm.findOneAndDelete({_id: farmId});
+      // return deletedItem
+      // }
+      // throw new AuthenticationError('You need to be logged in!');
+      return deletedFarm
     },
+
+  
 
     removeItem: async (parent, { farmId, itemId }, context) => {
       if (context.user) {
@@ -239,13 +249,7 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!'); // auth throw
     }
 
-    // removeSkill: async (parent, { profileId, skill }) => {
-    //   return Profile.findOneAndUpdate(
-    //     { _id: profileId },
-    //     { $pull: { skills: skill } },
-    //     { new: true }
-    //   );
-    // },
+    
   },
 
   // mutation to update users
@@ -266,39 +270,3 @@ const resolvers = {
 
 module.exports = resolvers;
 
-
-
-
-
-
-// delete users  will delete farms 
-
-// delete farms will delete items 
-
-
-
-//delete queries 
-
-// -----------------------------  The mess of code that I have already tried and failed -----------------------------------------------------
-
-// removeFarm: async (parent, { farmId }, ) => { // added context for auth. 
-  //   // if (context.user) {
-  //     let findFarm = await Farm.findOne({_id: farmId});
-  
-  //     console.log(findFarm);
-  //     //   {_id: farmI})
-  //     //   console.log(findFarm.items);
-  //     // let deletedFarm = Farm.findOneAndDelete({ _id: farmId }) ;
-    
-  //     // console.log(deleteItems);
-  //     // }
-  
-  //     // return deletedFarm;
-  
-  // // }
-  //   // throw new AuthenticationError('You need to be logged in!');
-  //   return findFarm;
-  
-  // },
-
-  // ----------------------------------------------------------------------------------------------------------------------------
