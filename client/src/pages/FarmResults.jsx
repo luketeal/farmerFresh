@@ -69,9 +69,9 @@ export default function Album() {
     const farms = data?.farmsByState || [];
     console.log(farms)
 
-    const handleClick = (event) => {
-        console.log(event)
-        searchFarm(event.target.value);
+    const handleClick = (buttonID) => {
+        console.log(buttonID)
+        searchFarm(buttonID);
         console.log("handleClick ran")
     };
 
@@ -128,7 +128,7 @@ export default function Album() {
                                     </CardContent>
                                     <CardActions>
                                         <Link to="./FarmVeggieResults" style={{ textDecoration: 'none' }} >
-                                            <Button size="small" color="secondary" variant="outlined" value={card._id} onClick={handleClick}>
+                                            <Button size="small" color="secondary" variant="outlined" value={card._id} onClick={() => handleClick(card._id)}>
                                                 View
                                             </Button>
                                         </Link>
