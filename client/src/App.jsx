@@ -24,7 +24,7 @@ const client = new ApolloClient({
 
 //how should we handle splash... 
 function App() {
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
   return (
     <ApolloProvider client={client}>
     <Router>
