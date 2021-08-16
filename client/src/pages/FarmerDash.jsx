@@ -313,7 +313,7 @@ export default function FarmerDash() {
                         <Typography variant="h4" className={classes.title}>
                             Farm items and produce:
                         </Typography>
-                        <div className={classes.demo}>
+                        <div id="listItems" className={classes.demo}>
                             <List dense={dense}>
                                 {generate(
                                     <ListItem>

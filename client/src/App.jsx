@@ -12,6 +12,7 @@ import FarmVeggieResults from './pages/FarmVeggieResults';
 import TestPage from './pages/TestPage';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { FarmProvider } from './utils/FarmContext';
+import {useState} from "react";
 
 const client = new ApolloClient({
   uri: '/graphql',
@@ -23,15 +24,16 @@ const client = new ApolloClient({
 
 //how should we handle splash... 
 function App() {
+  const [darkMode, setDarkMode] = useState(true);
   return (
     <ApolloProvider client={client}>
     <Router>
-      <div className="App">
-        <Header />
+      <div className={"App " +(darkMode && "active")}>
+        <Header darkMode={darkMode} setDarkMode={setDarkMode}/>
         <div className="app-container">
           <FarmProvider>
             <Route exact path="/">
-              <Splash />
+              <Splash/>
             </Route>
             <Route exact path="/farmresults">
               <FarmResults />

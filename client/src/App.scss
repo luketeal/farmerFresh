@@ -10,7 +10,58 @@
   // https://images.unsplash.com/photo-1620706857370-e1b9770e8bb1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80
   background-size: cover;
   background-position: center;
-  overflow: auto,
+  overflow: auto;
+  height: 100vh;
+  scroll-behavior: smooth;
+  scrollbar-width: none; 
+  &::-webkit-scrollbar{
+    display:none;
+  }
+
+  &.active{
+    background-color: #222121;
+    background-image: none;
+    h1,p,h2,#email,#password,h4{
+      color: white;
+    }
+    #demo-simple-select-filled-label{
+      color: white;
+    }
+    #select-filled{
+      color: white;
+    }
+    #cardContent{
+      background-color: #363636;
+    }
+    label{
+      color: white;
+      border-color: white;
+    }
+    #listItems{
+      color: white;
+    }
+    .MuiOutlinedInput-notchedOutline{
+      color: white;
+      border-color: white;
+    }
+    #ffLogo{
+      background-color: beige;
+      // width: 50vw;
+      height: 100%;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      border-radius: 50%; 
+      box-shadow: 0 0 60px 30px beige, 0 0 100px 60px beige, 0 0 140px 90px orange;
+      z-index: 0;
+    }
+    .MuiGrid-root{
+      background-color: inherit;
+      z-index: 1;
+    }
+    input{
+      color: white;
+    }
+  }
 
 }
 
