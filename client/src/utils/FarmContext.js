@@ -8,7 +8,7 @@ export const useFarmContext = () => useContext(FarmContext);
 
 // The provider is responsible for holding our state, updating the state, and persisting values to the children
 export const FarmProvider = ({ children }) => {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState();
 
   // Function to seat a student
   const searchFarms = (searchState) => {
