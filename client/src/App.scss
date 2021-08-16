@@ -12,6 +12,11 @@
   background-position: center;
   overflow: auto;
   height: 100vh;
+  scroll-behavior: smooth;
+  scrollbar-width: none; 
+  &::-webkit-scrollbar{
+    display:none;
+  }
 
   &.active{
     background-color: #222121;
