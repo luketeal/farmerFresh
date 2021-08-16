@@ -13,6 +13,7 @@ import TestPage from './pages/TestPage';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { FarmProvider } from './utils/FarmContext';
 import {useState} from "react";
+import {useEffect} from 'react';
 
 const client = new ApolloClient({
   uri: '/graphql',

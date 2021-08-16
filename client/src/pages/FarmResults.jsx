@@ -9,7 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
+import { Link } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 
 
@@ -71,9 +71,11 @@ export default function Album() {
                     <div className={classes.heroButtons}>
                         <Grid container spacing={2} justifyContent="center">
                             <Grid item>
-                                <Button href="./#" variant="contained" color="neutral" className={classes.searchBtn}>
-                                    Back to search
-                                </Button>
+                                <Link to="/" style={{ textDecoration: 'none' }}>
+                                    <Button variant="contained" color="neutral" className={classes.searchBtn}>
+                                        Back to search
+                                    </Button>
+                                </Link>
                             </Grid>
                         </Grid>
                     </div>

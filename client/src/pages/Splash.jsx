@@ -118,9 +118,12 @@ export default function Pricing() {
                     </FormControl>
 
                     <div>
-                        <Button href="./farmresults" variant="contained" color="neutral" className={classes.searchBtn} >
-                            Search
-                        </Button>
+                        <Link to="./farmResults"style={{ textDecoration: 'none' }}>
+                            <Button href="./farmresults" variant="contained" color="neutral" className={classes.searchBtn} >
+                                Search
+                            </Button>
+                        </Link>
+                        
 
 
 
