@@ -90,11 +90,13 @@ export default function Header({darkMode, setDarkMode}) {
                         Cart
                     </Button>
                 </nav>
-                <Button href="./farmerdash" color="neutral" variant="contained" className={classes.portalBtn}>
-                    Farmer Portal
-                </Button>
+                <Link to="./farmerdash" style={{ textDecoration: 'none' }}>
+                    <Button color="neutral" variant="contained" className={classes.portalBtn}>
+                        Farmer Portal
+                    </Button>
+                </Link>
                 <Button onClick={() => {
-                    setDarkMode(!darkMode)
+                    setDarkMode( !darkMode)
                 }}color="neutral" variant="contained" className={classes.darkModeBtn}>
                     Dark Mode
                 </Button>
