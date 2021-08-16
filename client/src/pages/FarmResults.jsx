@@ -11,6 +11,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Link } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
+import { useFarmContext } from '../utils/FarmContext';
+import {FARMS_BY_STATE} from '../utils/queries'
+import { useQuery } from '@apollo/client';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -54,7 +57,17 @@ const useStyles = makeStyles((theme) => ({
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function Album() {
+    const { search, searchFarms } = useFarmContext()
+    console.log(search)
     const classes = useStyles();
+    const { loading, error, data } = useQuery(FARMS_BY_STATE, {
+        variables: { state: search },
+    });
+
+    console.log(data)
+
+    const farms = data?.farmsByState || [];
+    console.log(farms)
 
     return (
         <React.Fragment>
@@ -83,7 +96,7 @@ export default function Album() {
 
                 <Container className={classes.cardGrid} maxWidth="md">
                     <Grid container spacing={4}>
-                        {cards.map((card) => (
+                        {farms.map((card) => (
                             <Grid item key={card} xs={12} sm={6} md={4}>
                                 <Card id="cardContent" className={classes.card}>
                                     <CardMedia
@@ -93,12 +106,12 @@ export default function Album() {
                                     />
                                     <CardContent className={classes.cardContent}>
                                         <Typography gutterBottom variant="h5" component="h2">
-                                            Farm name
+                                            {card.name}
                                         </Typography>
                                         <Typography>
                                             <ul>
                                                 <li>
-                                                    About farm.
+                                                    {card.description}
                                                 </li>
                                                 <li>
                                                     Some inspiring thing maybe
