@@ -107,9 +107,12 @@ export default function Album() {
                                         </Typography>
                                     </CardContent>
                                     <CardActions>
-                                        <Button href="./FarmVeggieResults" size="small" color="secondary" variant="outlined">
-                                            View
-                                        </Button>
+                                        <Link to="./FarmVeggieResults" style={{ textDecoration: 'none' }}>
+                                            <Button size="small" color="secondary" variant="outlined">
+                                                View
+                                            </Button>
+                                        </Link>
+                                        
                                     </CardActions>
                                 </Card>
                             </Grid>
