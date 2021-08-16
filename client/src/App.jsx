@@ -28,11 +28,12 @@ function App() {
   const [darkMode, setDarkMode] = useState(false);
   return (
     <ApolloProvider client={client}>
+      <FarmProvider>
     <Router>
       <div className={"App " +(darkMode && "active")}>
         <Header darkMode={darkMode} setDarkMode={setDarkMode}/>
         <div className="app-container">
-          <FarmProvider>
+          
             <Route exact path="/">
               <Splash/>
             </Route>
@@ -57,12 +58,13 @@ function App() {
               <FarmVeggieResults />
 
             </Route>
-          </FarmProvider>
+          
         </div>
         <Footer />
 
       </div>
     </Router>
+    </FarmProvider>
     </ApolloProvider>
     // <SignUp></SignUp>
   );
