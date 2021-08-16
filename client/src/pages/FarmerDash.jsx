@@ -17,6 +17,8 @@ import IconButton from '@material-ui/core/IconButton';
 import FolderIcon from '@material-ui/icons/Folder';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import { CREATE_FARM } from '../utils/mutations';
+import { useQuery, useMutation } from '@apollo/client';
 
 
 // Generating list items
@@ -67,6 +69,55 @@ export default function FarmerDash() {
     const classes = useStyles();
     const [dense, setDense] = React.useState(false);
     const [secondary, setSecondary] = React.useState(false);
+    const [farmFormState, setFarmFormState] = React.useState({
+        name: '',
+        description: '',
+        state: '',
+        town: '',
+        address: '',
+        zip: '',
+        website: '',
+        // imageURL: '',
+    })
+    const [addFarm, { error, data }] = useMutation(CREATE_FARM);
+
+
+    const handleFarmFormChange = (event) => {
+        const { name, value } = event.target;
+    
+        setFarmFormState({
+          ...farmFormState,
+          [name]: value,
+        });
+      };
+
+    const handleFarmFormSubmit = async (event) => {
+        event.preventDefault();
+        console.log(farmFormState);
+        try {
+          const { data } = await addFarm({
+            variables: { ...farmFormState },
+          });
+    
+        //   Auth.login(data.login.token);
+        } catch (e) {
+          console.error(e);
+        }
+    
+        // clear form values
+        setFarmFormState({
+            name: '',
+            description: '',
+            state: '',
+            town: '',
+            address: '',
+            zip: '',
+            website: '',
+            imageURL: '',
+        });
+      };
+
+
 
     return (
         <Container component="main" maxWidth="md">
@@ -84,8 +135,8 @@ export default function FarmerDash() {
                     Register a farm below:
                 </Typography>
 
-                {/* Farm input field? */}
-                <form className={classes.form} noValidate>
+                {/* Farm input field */}
+                <form className={classes.form} noValidate onSubmit={handleFarmFormSubmit}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <TextField
@@ -96,6 +147,47 @@ export default function FarmerDash() {
                                 label="Farm Name"
                                 name="farmName"
                                 autoComplete="farmName"
+                                value={farmFormState.name}
+                                onChange={handleFarmFormChange}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="farmDescription"
+                                label="Farm Description"
+                                name="farmDescription"
+                                autoComplete="farmDescription"
+                                value={farmFormState.description}
+                                onChange={handleFarmFormChange}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="state"
+                                label="State"
+                                name="state"
+                                autoComplete="state"
+                                value={farmFormState.state}
+                                onChange={handleFarmFormChange}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="town"
+                                label="Town"
+                                name="town"
+                                autoComplete="town"
+                                value={farmFormState.town}
+                                onChange={handleFarmFormChange}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -107,6 +199,8 @@ export default function FarmerDash() {
                                 label="Address"
                                 name="address"
                                 autoComplete="address"
+                                value={farmFormState.address}
+                                onChange={handleFarmFormChange}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -114,10 +208,25 @@ export default function FarmerDash() {
                                 variant="outlined"
                                 required
                                 fullWidth
-                                id="contactInfo"
-                                label="Contact Info"
-                                name="contactInfo"
-                                autoComplete="contactInfo"
+                                id="zipCode"
+                                label="Zip Code"
+                                name="zipCode"
+                                autoComplete="zipCode"
+                                value={farmFormState.zip}
+                                onChange={handleFarmFormChange}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="website"
+                                label="Website"
+                                name="website"
+                                autoComplete="website"
+                                value={farmFormState.website}
+                                onChange={handleFarmFormChange}
                             />
                         </Grid>
                     </Grid>

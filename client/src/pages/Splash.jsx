@@ -15,6 +15,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { ALL_FARMS } from '../utils/queries';
 import { useQuery } from '@apollo/client';
+import { useFarmContext } from '../utils/FarmContext';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -66,10 +67,11 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function Pricing() {
+    const { search, searchFarms } = useFarmContext()
     const classes = useStyles();
-    const [zipcode, setZipcode] = React.useState('');
+    // const [zipcode, setZipcode] = React.useState('');
     const handleChange = (event) => {
-        setZipcode(event.target.value);
+        searchFarms(event.target.value);
     };
 
 
@@ -106,7 +108,7 @@ export default function Pricing() {
                         <Select
                             labelId="select-filled-label"
                             id="select-filled"
-                            value={zipcode}
+                            value={search}
                             onChange={handleChange}
                         >
                             {

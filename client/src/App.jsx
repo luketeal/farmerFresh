@@ -11,6 +11,7 @@ import Footer from './components/Footer/Footer';
 import FarmVeggieResults from './pages/FarmVeggieResults';
 import TestPage from './pages/TestPage';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { FarmProvider } from './utils/FarmContext';
 
 const client = new ApolloClient({
   uri: '/graphql',
@@ -28,29 +29,32 @@ function App() {
       <div className="App">
         <Header />
         <div className="app-container">
-          <Route exact path="/">
-            <Splash />
-          </Route>
-          <Route exact path="/signin">
-            <Signin />
-          </Route>
-          <Route exact path="/signup">
-            <SignUp />
-          </Route>
-          <Route exact path="/farmresults">
-            <FarmResults />
-          </Route>
-          <Route exact path="/farmerdash">
-            <FarmerDash />
-          </Route>
+          <FarmProvider>
+            <Route exact path="/">
+              <Splash />
+            </Route>
+            <Route exact path="/farmresults">
+              <FarmResults />
+            </Route>
+          
+            <Route exact path="/signin">
+              <Signin />
+            </Route>
+            <Route exact path="/signup">
+              <SignUp />
+            </Route>
+            <Route exact path="/farmerdash">
+              <FarmerDash />
+            </Route>
 
-          <Route exact path="/testpage">
-            <TestPage/>
-           </Route>
-          <Route exact path="/farmveggieresults">
-            <FarmVeggieResults />
+            <Route exact path="/testpage">
+              <TestPage/>
+            </Route>
+            <Route exact path="/farmveggieresults">
+              <FarmVeggieResults />
 
-          </Route>
+            </Route>
+          </FarmProvider>
         </div>
         <Footer />
 
