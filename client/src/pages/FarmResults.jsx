@@ -83,7 +83,7 @@ export default function Album() {
                     <Grid container spacing={4}>
                         {cards.map((card) => (
                             <Grid item key={card} xs={12} sm={6} md={4}>
-                                <Card className={classes.card}>
+                                <Card id="cardContent" className={classes.card}>
                                     <CardMedia
                                         className={classes.cardMedia}
                                         image="https://images.unsplash.com/photo-1613061521413-d01a2539a364?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80"

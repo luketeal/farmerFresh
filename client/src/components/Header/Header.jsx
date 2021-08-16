@@ -31,6 +31,17 @@ const useStyles = makeStyles((theme) => ({
         marginTop: -40,
 
     },
+    darkModeBtn: {
+        background: 'black',
+        borderRadius: 10,
+        border: 0,
+        color: 'white',
+        height: 38,
+        padding: '15px 45px',
+        boxShadow: '5 0 20px #eee',
+        marginTop: -40,
+
+    },
     portalBtn: {
         margin: theme.spacing(0, 1.5),
         background: '#FAB617',
@@ -55,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function Header() {
+export default function Header({darkMode, setDarkMode}) {
     const classes = useStyles();
     return (
         <AppBar position="static" color="transparent" elevation={0}>
@@ -63,8 +74,8 @@ export default function Header() {
 
                 {/* need to figure out why local source not working for images*/}
                 <div className={classes.logo}>
-                    <Link to="/">
-                    <img src="https://raw.githubusercontent.com/luketeal/farmerFresh/main/assets/logo/droopLeafV1.png" />
+                    <Link id="ffLogo" to="/">
+                    <img  src="https://raw.githubusercontent.com/luketeal/farmerFresh/main/assets/logo/droopLeafV1.png" />
                     </Link>
                     
                 </div>
@@ -81,6 +92,11 @@ export default function Header() {
                 </nav>
                 <Button href="./farmerdash" color="neutral" variant="contained" className={classes.portalBtn}>
                     Farmer Portal
+                </Button>
+                <Button onClick={() => {
+                    setDarkMode(!darkMode)
+                }}color="neutral" variant="contained" className={classes.darkModeBtn}>
+                    Dark Mode
                 </Button>
             </Toolbar>
         </AppBar>
