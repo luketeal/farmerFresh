@@ -15,6 +15,9 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+import { useFarmContext } from '../utils/FarmContext';
+import {FARMS_BY_ID} from '../utils/queries'
+import { useQuery } from '@apollo/client';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -68,6 +71,14 @@ const cards = [1, 2, 3, 4, 5, 6];
 
 export default function FarmVeggieResults() {
     const classes = useStyles();
+    const { farmId } = useFarmContext()
+
+    const { loading, error, data } = useQuery(FARMS_BY_ID, {
+        variables: { _id: farmId },
+    });
+
+    console.log(data)
+    console.log(farmId)
 
     return (
         <Grid container className={classes.root}>

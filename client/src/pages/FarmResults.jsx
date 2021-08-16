@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function Album() {
-    const { search, searchFarms } = useFarmContext()
+    const { search, searchFarm, farmId } = useFarmContext()
     console.log(search)
     const classes = useStyles();
     const { loading, error, data } = useQuery(FARMS_BY_STATE, {
@@ -68,6 +68,13 @@ export default function Album() {
 
     const farms = data?.farmsByState || [];
     console.log(farms)
+
+    const handleClick = (buttonID) => {
+        console.log(buttonID)
+        searchFarm(buttonID);
+        console.log("handleClick ran")
+    };
+
 
     return (
         <React.Fragment>
@@ -120,9 +127,12 @@ export default function Album() {
                                         </Typography>
                                     </CardContent>
                                     <CardActions>
-                                        <Button href="./FarmVeggieResults" size="small" color="secondary" variant="outlined">
-                                            View
-                                        </Button>
+                                        <Link to="./FarmVeggieResults" style={{ textDecoration: 'none' }} >
+                                            <Button size="small" color="secondary" variant="outlined" value={card._id} onClick={() => handleClick(card._id)}>
+                                                View
+                                            </Button>
+                                        </Link>
+                                        
                                     </CardActions>
                                 </Card>
                             </Grid>

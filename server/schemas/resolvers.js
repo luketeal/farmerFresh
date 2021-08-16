@@ -15,8 +15,8 @@ const resolvers = {
       return Farm.find().populate('items');
     },
 
-    farm: async (parent, { zip }) => {
-      return Farm.findOne({ zip }).populate('items');
+    farm: async (parent, { _id }) => {
+      return Farm.findOne({ _id }).populate('items');
     },
 
     farmsByZip: async (parent, { zip }) => {
