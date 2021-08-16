@@ -76,9 +76,24 @@ export default function FarmVeggieResults() {
     const { loading, error, data } = useQuery(FARMS_BY_ID, {
         variables: { _id: farmId },
     });
+    const farm = data?.farm || [{
+        _id: "",
+        name: "",
+        description: "",
+        state: "",
+        town: "",
+        address: "",
+        website: "",
+        zip: "",
+        items: []
+    }];
+
+    if(!farm.items) {
+        farm.items = []
+    }
 
     console.log(data)
-    console.log(farmId)
+    console.log(farm)
 
     return (
         <Grid container className={classes.root}>
@@ -91,7 +106,7 @@ export default function FarmVeggieResults() {
                     </Avatar>
                     <Box mt={0}>
                         <Typography component="h1" variant="h2">
-                            Farm name
+                            {farm.name}
                         </Typography>
 
                         <Typography variant="h4">
@@ -100,7 +115,7 @@ export default function FarmVeggieResults() {
                                     Contact Info: 1-800-Veggie4U
                                 </li>
                                 <li>
-                                    Address: 555 Veggieville, USA
+                                    Address: {farm.address}, {farm.town} {farm.state}
                                 </li>
                             </ul>
                         </Typography>
@@ -115,7 +130,7 @@ export default function FarmVeggieResults() {
 
             <Container className={classes.cardGrid} maxWidth="md">
                 <Grid container spacing={4}>
-                    {cards.map((card) => (
+                    {farm.items.map((card) => (
                         <Grid item key={card} xs={12} sm={6} md={4}>
                             <Card id="cardContent" className={classes.card}>
                                 <CardMedia
@@ -125,15 +140,15 @@ export default function FarmVeggieResults() {
                                 />
                                 <CardContent className={classes.card}>
                                     <Typography gutterBottom variant="h5" component="h2">
-                                        These are my veggies
+                                        {card.name}
                                     </Typography>
                                     <Typography>
                                         <ul>
                                             <li>
-                                                Amount available
+                                                {card.price} {card.unit}
                                             </li>
                                             <li>
-                                                Description about how fresh it is
+                                                {card.count} available
                                             </li>
                                         </ul>
                                     </Typography>
