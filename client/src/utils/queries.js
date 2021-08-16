@@ -53,3 +53,26 @@ query allFarmsByState($state: String!) {
 }
 
 `
+
+export const FARMS_BY_ID = gql `
+query farmByID($_id: ID!) {
+  farm(_id: $_id) {
+    _id
+    name
+    description
+    state
+    town
+    address
+    website
+    zip
+    items {
+      _id
+      name
+      price
+      count
+      unit
+    }
+  }
+}
+
+`

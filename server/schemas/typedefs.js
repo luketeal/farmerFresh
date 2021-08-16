@@ -47,7 +47,7 @@ type Auth {
      
 type Query {
  
-    farm(zip: String!): Farm
+    farm(_id: ID!): Farm
     farms: [Farm]
     farmsByZip (zip: [String!]): [Farm]
     user(_id: String!): User
