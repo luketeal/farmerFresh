@@ -81,7 +81,7 @@ export default function Album() {
             <CssBaseline />
 
             <main className={classes.mainContent}>
-                <Container maxWidth="sm" className={classes.heroContent}>
+                <Container maxWidth="sm" className={classes.heroContent} id="resultsContainer">
                     <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
                         Farms near You
                     </Typography>
