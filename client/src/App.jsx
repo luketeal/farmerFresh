@@ -10,13 +10,51 @@ import FarmerDash from './pages/FarmerDash';
 import Footer from './components/Footer/Footer';
 import FarmVeggieResults from './pages/FarmVeggieResults';
 import TestPage from './pages/TestPage';
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
 import { FarmProvider } from './utils/FarmContext';
 import {useState} from "react";
 import {useEffect} from 'react';
 
-const client = new ApolloClient({
+import { setContext } from '@apollo/client/link/context';
+
+
+
+
+
+// ------------------------------------------ added this link to link auth with ---------------------------------------------------------------
+// Construct our main GraphQL API endpoint
+const httpLink = createHttpLink({
   uri: '/graphql',
+});
+// --------------------------------------------------------------------------------------------------------------------------------------------
+
+// ------------------------------------------- added this authlink function that grabs the headers and adds the token ---------------------------
+
+// Construct request middleware that will attach the JWT token to every request as an `authorization` header
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = localStorage.getItem('id_token');
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+
+
+// ---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+// const client = new ApolloClient({
+//   uri: '/graphql',                    commented this code out as a copy of original befoe my change.
+//   cache: new InMemoryCache(),
+// });
+
+const client = new ApolloClient({
+
+  link: authLink.concat(httpLink),   // added this line to add the authlink function to concat the httplink. 
   cache: new InMemoryCache(),
 });
 

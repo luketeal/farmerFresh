@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';                    // added use state 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -10,6 +10,16 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+
+// ------------------------------------------------------ADD FOR AUTH-----------------------------------------------------
+import { useMutation } from '@apollo/client';
+import { CREATE_USER } from '../utils/mutations';
+
+import Auth from '../utils/auth';
+
+
+// -----------------------------------------------------------------------------------------------------------------------
+
 
 function Copyright() {
   return (
@@ -55,6 +65,38 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
   const classes = useStyles();
 
+  // --------------------------------------------------------- added for auth ------------------------------------------------------------------
+  const [formState, setFormState] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
+  const [addUser, { error, data }] = useMutation(CREATE_USER);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    console.log(formState);
+
+    try {
+      const { data } = await addUser({
+        variables: { ...formState },
+      });
+
+      Auth.login(data.addUser.token);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -65,6 +107,15 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
+{/* ------------------------------------------------------------------------------------------------------------------------------ */}
+        {data ? (
+              <p>
+                Success! You may now head{' '}
+                <Link to="/">back to the homepage.</Link>
+              </p>
+            ) : (
+// ---------------------------------------------------------------------------------------------------------------------------------
+
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
@@ -75,7 +126,10 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="firstName"
-                label="First Name"
+                placeholder="First Name"
+                type= "text"
+                value={formState.firstname}
+                onChange={handleChange}
                 autoFocus
               />
             </Grid>
@@ -85,8 +139,11 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="lastName"
-                label="Last Name"
+                placeholder="Last Name"
                 name="lastName"
+                type="text"
+                value={formState.lastname}
+                onChange={handleChange}
                 autoComplete="lname"
               />
             </Grid>
@@ -96,8 +153,11 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                placeholder="Email Address"
                 name="email"
+                type="email"
+                value={formState.email}
+                onChange={handleChange}
                 autoComplete="email"
               />
             </Grid>
@@ -107,9 +167,11 @@ export default function SignUp() {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                placeholder="Password"
                 type="password"
                 id="password"
+                value={formState.password}
+                onchange={handleChange}
                 autoComplete="current-password"
               />
             </Grid>
@@ -137,6 +199,15 @@ export default function SignUp() {
             </Grid>
           </Grid>
         </form>
+        // ------------------------------------------------------------------------------------------
+         )}
+
+         {error && (
+           <div className="my-3 p-3 bg-danger text-white">
+             {error.message}
+           </div>
+         )}
+    {/* ----------------------------------------------------------------------------------- */}
       </div>
     </Container>
   );
