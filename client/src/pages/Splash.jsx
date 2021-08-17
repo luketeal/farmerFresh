@@ -93,7 +93,7 @@ export default function Pricing() {
                 </Avatar>
 
                 {/* Hero unit */}
-                <Container maxWidth="sm" component="main" className={classes.heroContent}>
+                <Container maxWidth="sm" component="main" className={classes.heroContent} id="splashContainer">
 
                     <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
                         Find a farming community now

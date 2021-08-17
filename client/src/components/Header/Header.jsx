@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
         border: 0,
         color: 'white',
         height: 38,
-        padding: '15px 45px',
+        padding: '15px 12px',
         boxShadow: '5 0 20px #eee',
         marginTop: -40,
 
@@ -73,33 +73,58 @@ export default function Header({darkMode, setDarkMode}) {
             <Toolbar className={classes.toolbar}>
 
                 {/* need to figure out why local source not working for images*/}
-                <div className={classes.logo}>
-                    <Link id="ffLogo" to="/">
-                    <img  src="https://raw.githubusercontent.com/luketeal/farmerFresh/main/assets/logo/droopLeafV1.png" />
-                    </Link>
-                    
+                <div className="container-xs">
+                    <div className="row">
+                        <div className="col-xs">
+                            <div className={classes.logo}>
+                                <Link id="ffLogo" to="/">
+                                <img  class="img-fluid" src="https://raw.githubusercontent.com/luketeal/farmerFresh/main/assets/logo/droopLeafV1.png" />
+                                </Link>
+                                
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                
+                
+                
 
 
                 <Typography variant="h6" color="inherit" className={classes.toolbarTitle}>
                     {/* <img src={logo} alt="logo" /> */}
                 </Typography>
-
-                <nav>
+                <div className="container-xs">
+                <div className="row ">
+                    <div className="col-xs-12 col-sm-3 py-3">
+                    <nav>
                     <Button href="#" color="neutral" variant="contained" className={classes.cartBtn}>
                         Cart
                     </Button>
                 </nav>
+                </div>
+                <div className="col-xs-12 col-sm-6 py-3">
                 <Link to="./farmerdash" style={{ textDecoration: 'none' }}>
                     <Button color="neutral" variant="contained" className={classes.portalBtn}>
                         Farmer Portal
                     </Button>
                 </Link>
+                </div>
+                <div className="col-xs-12 col-sm-3 pt-3">
                 <Button onClick={() => {
                     setDarkMode( !darkMode)
                 }}color="neutral" variant="contained" className={classes.darkModeBtn}>
                     Dark Mode
                 </Button>
+
+                </div>
+                
+                </div>
+                </div>
+
+                
+               
+
+
             </Toolbar>
         </AppBar>
     )
