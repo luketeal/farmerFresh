@@ -89,8 +89,8 @@ const resolvers = {
         return newFarm  // <----- Delete this when implementing authentication
     },
 
-    addUser: async(parent, {name, email, password, state, town, address, zip}) => {
-      const user = await User.create({name, email, password, state, town, address, zip}); // changed return user into a variable assignment
+    addUser: async(parent, {name, email, password}) => {
+      const user = await User.create({name, email, password}); // changed return user into a variable assignment
       const token = signToken(user);        // added token variable be assigned the sign token
       console.log(token);
       return {token, user};            // changed return statement to return the user and the token.
