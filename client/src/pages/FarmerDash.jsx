@@ -18,6 +18,7 @@ import FolderIcon from '@material-ui/icons/Folder';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { CREATE_FARM } from '../utils/mutations';
+import { CREATE_ITEM } from '../utils/mutations';
 import { useQuery, useMutation } from '@apollo/client';
 
 
@@ -64,6 +65,8 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(5),
     },
 }));
+let isRegistered = false;
+let items = [];
 
 export default function FarmerDash() {
     const classes = useStyles();
@@ -79,31 +82,49 @@ export default function FarmerDash() {
         website: '',
         // imageURL: '',
     })
-    const [addFarm, { error, data }] = useMutation(CREATE_FARM);
+    const [itemFormState, setItemFormState] = React.useState({
+        name: '',
+        description: '',
+        quantity: '',
+        // imageURL: '',
+    })
+    let [addFarm, { error, data }] = useMutation(CREATE_FARM);
+    let [addItem, { e, d }] = useMutation(CREATE_ITEM);
 
 
     const handleFarmFormChange = (event) => {
         const { name, value } = event.target;
-    
+
         setFarmFormState({
-          ...farmFormState,
-          [name]: value,
+            ...farmFormState,
+            [name]: value,
         });
-      };
+    };
+
+    const handleItemFormChange = (event) => {
+        const { name, value } = event.target;
+
+        setItemFormState({
+            ...itemFormState,
+            [name]: value
+        })
+    }
 
     const handleFarmFormSubmit = async (event) => {
+        isRegistered = true;
         event.preventDefault();
         console.log(farmFormState);
+        console.log(isRegistered)
         try {
-          const { data } = await addFarm({
-            variables: { ...farmFormState },
-          });
-    
-        //   Auth.login(data.login.token);
+            const { data } = await addFarm({
+                variables: { ...farmFormState },
+            });
+
+            //   Auth.login(data.login.token);
         } catch (e) {
-          console.error(e);
+            console.error(e);
         }
-    
+
         // clear form values
         setFarmFormState({
             name: '',
@@ -115,7 +136,35 @@ export default function FarmerDash() {
             website: '',
             imageURL: '',
         });
-      };
+    };
+
+    const handleItemFormSubmit = async (event) => {
+        event.preventDefault();
+        console.log(itemFormState);
+        items.push(itemFormState);
+        console.log(items)
+        /** 
+         * TODO: make sure addItem query works]
+         * TODO: add farmId or add item to farm object
+         * TODO: fix farm items grid view to correspond with items array
+         * **/
+
+        // try {
+        //     const { data } = await addItem({
+        //         variable: {
+        //             ...itemFormState,
+        //         }
+        //     });
+        // } catch (e) {
+        //     console.error(e)
+        // }
+
+        setItemFormState({
+            name: '',
+            description: '',
+            quantity: ''
+        })
+    };
 
 
 
@@ -143,10 +192,10 @@ export default function FarmerDash() {
                                 variant="outlined"
                                 required
                                 fullWidth
-                                id="farmName"
+                                id="name"
                                 label="Farm Name"
-                                name="farmName"
-                                autoComplete="farmName"
+                                name="name"
+                                autoComplete="name"
                                 value={farmFormState.name}
                                 onChange={handleFarmFormChange}
                             />
@@ -156,10 +205,10 @@ export default function FarmerDash() {
                                 variant="outlined"
                                 required
                                 fullWidth
-                                id="farmDescription"
+                                id="description"
                                 label="Farm Description"
-                                name="farmDescription"
-                                autoComplete="farmDescription"
+                                name="description"
+                                autoComplete="description"
                                 value={farmFormState.description}
                                 onChange={handleFarmFormChange}
                             />
@@ -208,10 +257,10 @@ export default function FarmerDash() {
                                 variant="outlined"
                                 required
                                 fullWidth
-                                id="zipCode"
+                                id="zip"
                                 label="Zip Code"
-                                name="zipCode"
-                                autoComplete="zipCode"
+                                name="zip"
+                                autoComplete="zip"
                                 value={farmFormState.zip}
                                 onChange={handleFarmFormChange}
                             />
@@ -243,108 +292,80 @@ export default function FarmerDash() {
 
                 <div className={classes.appBarSpacer} />
 
-                <Typography variant="h4">
-                    Enter your farm items:
-                </Typography>
+                <div>
+                    {isRegistered ? (
+                        <div>
+                            <Typography variant="h4">
+                                Enter your farm items:
+                            </Typography>
+                            {/* Veggie input field? */}
+                            <form className={classes.form} noValidate onSubmit={handleItemFormSubmit}>
+                                <Grid container spacing={2}>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            variant="outlined"
+                                            required
+                                            fullWidth
+                                            id="name"
+                                            label="Item Name"
+                                            name="name"
+                                            autoComplete="name"
+                                            onChange={handleItemFormChange}
 
-
-                {/* Veggie input field? */}
-                <form className={classes.form} noValidate>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="itemName"
-                                label="Item Name"
-                                name="itemName"
-                                autoComplete="itemName"
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="description"
-                                label="Description"
-                                name="description"
-                                autoComplete="description"
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="quantity"
-                                label="Quantity"
-                                name="quantity"
-                                autoComplete="quantity"
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="whichFarm"
-                                label="Which Farm"
-                                name="whichFarm"
-                                autoComplete="whichFarm"
-                            />
-                        </Grid>
-                    </Grid>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                    >
-                        Submit Item
-                    </Button>
-                </form>
-
-
-                <Grid container spacing={2}>
-                    <Grid item xs={12} md={12}>
-                        <Typography variant="h4" className={classes.title}>
-                            Farm items and produce:
-                        </Typography>
-                        <div id="listItems" className={classes.demo}>
-                            <List dense={dense}>
-                                {generate(
-                                    <ListItem>
-                                        <ListItemAvatar>
-                                            <Avatar>
-                                                <FolderIcon />
-                                            </Avatar>
-                                        </ListItemAvatar>
-                                        <ListItemText
-                                            primary="Produce and veggie items"
-                                            secondary={secondary ? 'Secondary text' : null}
                                         />
-                                        <ListItemSecondaryAction className={classes.editIconSpace}>
-                                            <IconButton edge="start" aria-label="edit" color="primary">
-                                                <EditIcon />
-                                            </IconButton>
-                                        </ListItemSecondaryAction>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            variant="outlined"
+                                            required
+                                            fullWidth
+                                            id="description"
+                                            label="Description"
+                                            name="description"
+                                            autoComplete="description"
+                                            onChange={handleItemFormChange}
 
-                                        <div className={classes.appBarSpacer} />
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            variant="outlined"
+                                            required
+                                            fullWidth
+                                            id="quantity"
+                                            label="Quantity"
+                                            name="quantity"
+                                            autoComplete="quantity"
+                                            onChange={handleItemFormChange}
 
-                                        <ListItemSecondaryAction>
-                                            <IconButton edge="end" aria-label="delete">
-                                                <DeleteIcon />
-                                            </IconButton>
-                                        </ListItemSecondaryAction>
-                                    </ListItem>,
-                                )}
-                            </List>
+                                        />
+                                    </Grid>
+
+                                </Grid>
+                                <Button
+                                    type="submit"
+                                    fullWidth
+                                    variant="contained"
+                                    color="primary"
+                                    className={classes.submit}
+                                >
+                                    Submit Item
+                                </Button>
+                            </form>
                         </div>
-                    </Grid>
-                </Grid>
+                    ) : <div></div>}
+                </div>
+
+                <div>
+                    {items.length > 0 ? (
+                        <div>
+                            <Typography variant="h4" className={classes.title}>
+                                Farm items and produce:
+                            </Typography>
+                        </div>
+                    ) : <div></div>}
+                </div>
+
             </main>
         </Container >
     );
