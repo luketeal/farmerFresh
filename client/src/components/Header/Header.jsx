@@ -37,10 +37,9 @@ const useStyles = makeStyles((theme) => ({
         border: 0,
         color: 'white',
         height: 38,
-        padding: '15px 45px',
+        padding: '15px 12px',
         boxShadow: '5 0 20px #eee',
         marginTop: -40,
-        fontSize: "smaller",
 
     },
     portalBtn: {
