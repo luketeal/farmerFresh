@@ -14,10 +14,13 @@ db.once('open', async () => {
   // bulk create each model
   const farms = await Farm.insertMany(farmData);
   const items = await Item.insertMany(itemData);
-  const users = await User.insertMany(userData);
+  for (newUser of userData) {
+    await User.create(newUser)
+  }
 
   for (newFarm of farms) {
     // randomly add each class to a school
+    const users = await User.find()
     const tempUser = users[Math.floor(Math.random() * users.length)];
   
     tempUser.farms.push(newFarm._id);
