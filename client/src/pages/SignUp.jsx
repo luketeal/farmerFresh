@@ -67,7 +67,7 @@ export default function SignUp() {
 
   // --------------------------------------------------------- added for auth ------------------------------------------------------------------
   const [formState, setFormState] = useState({
-    username: '',
+    name: '',
     email: '',
     password: '',
   });
@@ -116,35 +116,21 @@ export default function SignUp() {
             ) : (
 // ---------------------------------------------------------------------------------------------------------------------------------
 
-        <form className={classes.form} noValidate>
+        <form onSubmit={handleFormSubmit} className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="fname"
-                name="firstName"
+                name="name"
                 variant="outlined"
                 required
                 fullWidth
-                id="firstName"
+                id="name"
                 placeholder="First Name"
                 type= "text"
                 value={formState.firstname}
                 onChange={handleChange}
                 autoFocus
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                placeholder="Last Name"
-                name="lastName"
-                type="text"
-                value={formState.lastname}
-                onChange={handleChange}
-                autoComplete="lname"
               />
             </Grid>
             <Grid item xs={12}>
@@ -163,17 +149,17 @@ export default function SignUp() {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                placeholder="Password"
-                type="password"
-                id="password"
-                value={formState.password}
-                onchange={handleChange}
-                autoComplete="current-password"
-              />
+              variant="outlined"
+              required
+              fullWidth
+              name="password"               // added code to submit.
+              placeholder="Password"
+              type="password"
+              id="password"
+              value={formState.password}
+              onChange={handleChange}
+              autoComplete="current-password"
+            />
             </Grid>
             {/* <Grid item xs={12}>
               <FormControlLabel

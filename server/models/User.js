@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
   name: {
     type: String,
-    unique: true
   },
   email: {
     type: String,
@@ -16,10 +15,6 @@ const UserSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  state: String,
-  town: String,
-  address: String,
-  zip: String,
   farms: [
     {
       type: Schema.Types.ObjectId,

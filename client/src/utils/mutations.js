@@ -79,30 +79,19 @@ mutation addNewUser(
     $name: String!, 
     $email: String!, 
   	$password: String!,
-    $state: String, 
-    $town: String, 
-    $address: String, 
-    $zip:String!
   ) {
   addUser(
     name: $name
   	email: $email
     password: $password
-    state: $state
-    town: $town
-    address: $address
-    zip: $zip
-  ) 
-  token
-  {
-  	_id
-  	name
-  	email
-    password
-    state
-    town
-    address
-    zip
+  ) {
+    token
+    user {
+      _id
+      name
+      email
+      password
+    }
   }
 }
 `;
