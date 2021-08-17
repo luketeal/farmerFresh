@@ -14,7 +14,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@ap
 import { FarmProvider } from './utils/FarmContext';
 import {useState} from "react";
 import {useEffect} from 'react';
-
+import Auth from './utils/auth';
 import { setContext } from '@apollo/client/link/context';
 
 
@@ -85,10 +85,15 @@ function App() {
             <Route exact path="/signup">
               <SignUp />
             </Route>
+            
             <Route exact path="/farmerdash">
+            {Auth.loggedIn() ? (
               <FarmerDash />
+              ) : (
+                <Signin />
+              )}
             </Route>
-
+            
             <Route exact path="/testpage">
               <TestPage/>
             </Route>
