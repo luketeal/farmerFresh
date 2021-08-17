@@ -99,12 +99,12 @@ export default function FarmVeggieResults() {
         <Grid container className={classes.root}>
             <CssBaseline />
 
-            <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+            <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square id="farmBox">
                 <div className={classes.paper}>
                     <Avatar className={classes.avatar}>
                         <FilterHdrRoundedIcon />
                     </Avatar>
-                    <Box mt={0}>
+                    <Box mt={0} >
                         <Typography component="h1" variant="h2">
                             {farm.name}
                         </Typography>
