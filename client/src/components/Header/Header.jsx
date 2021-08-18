@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
         border: 0,
         color: 'white',
         height: 38,
-        padding: '15px 12px',
+        padding: '15px 21px',
         boxShadow: '5 0 20px #eee',
         marginTop: -40,
 
@@ -51,7 +51,18 @@ const useStyles = makeStyles((theme) => ({
         border: 0,
         color: 'black',
         height: 38,
-        padding: '15px 45px',
+        padding: '15px 30px',
+        boxShadow: '5 0 20px #eee',
+        marginTop: -40,
+
+    },
+    logoutBtn: {
+        background: '#FAB617',
+        borderRadius: 10,
+        border: 0,
+        color: 'black',
+        height: 38,
+        padding: '15px 30px',
         boxShadow: '5 0 20px #eee',
         marginTop: -40,
 
@@ -100,13 +111,13 @@ export default function Header({darkMode, setDarkMode}) {
                 <Typography variant="h6" color="inherit" className={classes.toolbarTitle}>
                     {/* <img src={logo} alt="logo" /> */}
                 </Typography>
-                <div className="container-xs">
-                <div className="row ">
-                    <div className="col-xs-12 col-sm-3 py-3">
+                <div className="btnContainer">
+                <div className="row">
+                    <div className="col-xs-12 col-sm-3 py-3 px-0">
                     <nav>
                     {Auth.loggedIn() ? (   
-                    <Button color="neutral" variant="contained" className={classes.cartBtn} onClick= {logout}>
-                        Log Out
+                    <Button color="neutral" variant="contained" className={classes.logoutBtn} onClick= {logout}>
+                        LogOut
                     </Button>
                        ) : (
                     <Button href="#" color="neutral" variant="contained" className={classes.cartBtn}>
@@ -115,17 +126,19 @@ export default function Header({darkMode, setDarkMode}) {
                        )}
                 </nav>
                 </div>
-                <div className="col-xs-12 col-sm-6 py-3">
+                <div className="col-xs-12 col-sm-6 py-3 px-0">
                 <Link to="./farmerdash" style={{ textDecoration: 'none' }}>
                     <Button color="neutral" variant="contained" className={classes.portalBtn}>
                         Farmer Portal
+
+                        
                     </Button>
                 </Link>
                 </div>
-                <div className="col-xs-12 col-sm-3 pt-3">
+                <div className="col-xs-12 col-sm-3 pt-3 px-0">
                 <Button onClick={() => {
                     setDarkMode( !darkMode)
-                }}color="neutral" variant="contained" className={classes.darkModeBtn}>
+                }}color="neutral" variant="contained" className={classes.darkModeBtn}> 
                     Dark Mode
                 </Button>
                
