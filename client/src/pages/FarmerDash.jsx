@@ -101,6 +101,7 @@ export default function FarmerDash() {
       
     let { loading: loadingUser, error: errorUser, data: dataUser } = useQuery(USER_BY_ID);   
     let [isRegistered, setRegistered] = React.useState(loadingUser || dataUser.user.farms === undefined || dataUser.user.farms.length === 0 ? false : true);
+    let [hasItems, setHasItems] = React.useState(isRegistered === false || dataUser.user.farms.items === undefined || dataUser.user.farms.items.length === 0 ? false : true)
 
     useEffect(() => {
         if (!loadingUser && dataUser.user.farms !== undefined && dataUser.user.farms.length !== 0) {
@@ -110,7 +111,12 @@ export default function FarmerDash() {
                     farmID: dataUser.user.farms[0]._id,
                 }
             )
+            if( dataUser.user.farms[0].items !== undefined && dataUser.user.farms.length !== 0) {
+                setHasItems(true)
+            }
         }
+        
+
     },[dataUser])
 
     const username = dataUser?.user?.name || "hmmm....";
@@ -406,7 +412,7 @@ export default function FarmerDash() {
                 </div>
 
                 <div>
-                    {items.length > 0 ? (
+                    {hasItems ? (
                         <div>
                             <Typography variant="h4" className={classes.title}>
                                 Farm items and produce:
