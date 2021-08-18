@@ -87,8 +87,10 @@ export default function FarmerDash() {
     })
     const [itemFormState, setItemFormState] = React.useState({
         name: '',
-        description: '',
-        quantity: '',
+        price: '',
+        unit: '',
+        count: '',
+        farmID: '',
         // imageURL: '',
     })
     let data1;
@@ -103,8 +105,13 @@ export default function FarmerDash() {
     useEffect(() => {
         if (!loadingUser && dataUser.user.farms !== undefined && dataUser.user.farms.length !== 0) {
             setRegistered(true)
+            setItemFormState (            
+                {   ...itemFormState,
+                    farmID: dataUser.user.farms[0]._id,
+                }
+            )
         }
-    })
+    },[dataUser])
 
     const username = dataUser?.user?.name || "hmmm....";
 
@@ -135,14 +142,20 @@ export default function FarmerDash() {
         console.log(farmFormState);
         console.log(isRegistered)
         try {
-            const { data } = await addFarm({
+            let { data } = await addFarm({
                 variables: { ...farmFormState },
-            });
+            })
+            setItemFormState (            
+                {   ...itemFormState,
+                    farmID: data.addFarm._id,
+                }
+            )
 
             //   Auth.login(data.login.token);
         } catch (e) {
             console.error(e);
         }
+ 
 
         // clear form values
         setFarmFormState({
@@ -168,20 +181,23 @@ export default function FarmerDash() {
          * TODO: fix farm items grid view to correspond with items array
          * **/
 
-        // try {
-        //     const { data } = await addItem({
-        //         variable: {
-        //             ...itemFormState,
-        //         }
-        //     });
-        // } catch (e) {
-        //     console.error(e)
-        // }
+        try {
+            let { data } = await addItem({
+                variable: {
+                    ...itemFormState,
+                }
+            });
+            console.log(data)
+        } catch (e) {
+            console.error(e)
+        }
 
         setItemFormState({
+            ...itemFormState,
             name: '',
-            description: '',
-            quantity: ''
+            price: '',
+            unit: '',
+            count: '',
         })
     };
 
@@ -341,10 +357,10 @@ export default function FarmerDash() {
                                             variant="outlined"
                                             required
                                             fullWidth
-                                            id="description"
-                                            label="Description"
-                                            name="description"
-                                            autoComplete="description"
+                                            id="price"
+                                            label="Cost"
+                                            name="price"
+                                            autoComplete="price"
                                             onChange={handleItemFormChange}
 
                                         />
@@ -354,10 +370,23 @@ export default function FarmerDash() {
                                             variant="outlined"
                                             required
                                             fullWidth
-                                            id="quantity"
-                                            label="Quantity"
-                                            name="quantity"
-                                            autoComplete="quantity"
+                                            id="unit"
+                                            label="Per? (example: lb or each)"
+                                            name="unit"
+                                            autoComplete="unit"
+                                            onChange={handleItemFormChange}
+
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            variant="outlined"
+                                            required
+                                            fullWidth
+                                            id="count"
+                                            label="Quantity Available"
+                                            name="count"
+                                            autoComplete="count"
                                             onChange={handleItemFormChange}
 
                                         />

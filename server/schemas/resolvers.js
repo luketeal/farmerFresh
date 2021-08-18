@@ -89,7 +89,7 @@ const resolvers = {
           {new: true}
           ).populate('farms') // populating the farms array.
 
-          return newFarm    // returning updated user 
+          return newFarm    // returning updated farm 
         }
         throw new AuthenticationError('You need to be logged in!');
         // -------------------
@@ -134,7 +134,7 @@ const resolvers = {
         { $addToSet: { items: newItem._id } },
         { new: true }
       ).populate('items')
-      return updatedFarm
+      return newItem
       
       }
       throw new AuthenticationError('You need to be logged in!');
