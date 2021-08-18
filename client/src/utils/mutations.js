@@ -178,4 +178,3 @@ mutation removeoneItem($farmId: ID!, $itemId: ID!) {
 	unit
   }
 }`;
-
