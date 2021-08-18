@@ -57,7 +57,7 @@ type Query {
 type Mutation {
     
     addFarm(name: String!, description: String, state: String!, town: String!, address: String!, website: String!, zip: String!): Farm
-    addItem(name: String!, price: String!, count: String!, unit: String!, farmID: ID!): Farm
+    addItem(name: String!, price: String!, count: String!, unit: String!, farmID: ID!): Item
     addUser(name: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     updateFarm(_id: ID!, name: String, description: String, state: String, town: String, address: String, website: String, zip: String): Farm

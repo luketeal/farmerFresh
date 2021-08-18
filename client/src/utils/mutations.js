@@ -47,30 +47,24 @@ mutation addFarm(
 export const CREATE_ITEM = gql`
 mutation addNewItem(
     $name: String!, 
-    $description: String!, 
-    $quantity: String!, 
+    $price: String!, 
+    $unit: String!,
+    $count: String!,
+    $farmID: ID!,
   ) {
   addItem(
     name: $name
-  	description: $description
-    quantity: $quantity
+  	price: $price
+    unit: $unit
+    count: $count
+    farmID: $farmID
   ) {
-  _id
-  name
-  description
-  state
-  town
-  address
-  website
-  zip
-    items {
-      _id
-      name
-      price
-      count
-      unit
+    _id
+    name
+    price
+    count
+    unit
     }
-  }
 }
 `;
 

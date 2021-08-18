@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import List from '@material-ui/core/List';
@@ -67,13 +67,14 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(5),
     },
 }));
-let isRegistered = false;
+
 let items = [];
 
 export default function FarmerDash() {
     const classes = useStyles();
     const [dense, setDense] = React.useState(false);
     const [secondary, setSecondary] = React.useState(false);
+    // const [farmName, setFarmName] = React.useState()
     const [farmFormState, setFarmFormState] = React.useState({
         name: '',
         description: '',
@@ -86,8 +87,10 @@ export default function FarmerDash() {
     })
     const [itemFormState, setItemFormState] = React.useState({
         name: '',
-        description: '',
-        quantity: '',
+        price: '',
+        unit: '',
+        count: '',
+        farmID: '',
         // imageURL: '',
     })
     let data1;
@@ -96,18 +99,22 @@ export default function FarmerDash() {
 
     let [addItem, { loading: loadingNewItem, error: errorNewItem, data: dataNewItem }] = useMutation(CREATE_ITEM);
       
-    let { loading: loadingUser, error: errorUser, data: dataUser } = useQuery(USER_BY_ID);    
-    if(loadingUser) {
-        console.log('loading')
-    }
-    if(errorUser) {
-        console.log(errorUser)
-    }
-    if(dataUser) {
-        data1 = dataUser
-    }
+    let { loading: loadingUser, error: errorUser, data: dataUser } = useQuery(USER_BY_ID);   
+    let [isRegistered, setRegistered] = React.useState(loadingUser || dataUser.user.farms === undefined || dataUser.user.farms.length === 0 ? false : true);
 
-    const username = data1?.user.name || "hmmm....";
+    useEffect(() => {
+        if (!loadingUser && dataUser.user.farms !== undefined && dataUser.user.farms.length !== 0) {
+            setRegistered(true)
+            setItemFormState (            
+                {   ...itemFormState,
+                    farmID: dataUser.user.farms[0]._id,
+                }
+            )
+        }
+    },[dataUser])
+
+    const username = dataUser?.user?.name || "hmmm....";
+
     // const profile = Auth.getProfile()
     // console.log(profile.data._id)
 
@@ -130,19 +137,25 @@ export default function FarmerDash() {
     }
 
     const handleFarmFormSubmit = async (event) => {
-        isRegistered = true;
+        setRegistered(true)
         event.preventDefault();
         console.log(farmFormState);
         console.log(isRegistered)
         try {
-            const { data } = await addFarm({
+            let { data } = await addFarm({
                 variables: { ...farmFormState },
-            });
+            })
+            setItemFormState (            
+                {   ...itemFormState,
+                    farmID: data.addFarm._id,
+                }
+            )
 
             //   Auth.login(data.login.token);
         } catch (e) {
             console.error(e);
         }
+ 
 
         // clear form values
         setFarmFormState({
@@ -168,20 +181,21 @@ export default function FarmerDash() {
          * TODO: fix farm items grid view to correspond with items array
          * **/
 
-        // try {
-        //     const { data } = await addItem({
-        //         variable: {
-        //             ...itemFormState,
-        //         }
-        //     });
-        // } catch (e) {
-        //     console.error(e)
-        // }
+        try {
+            let { loading, error, data } = await addItem({
+                variables: { ...itemFormState }
+            });
+            console.log(data)
+        } catch (error) {
+            console.error(error)
+        }
 
         setItemFormState({
+            ...itemFormState,
             name: '',
-            description: '',
-            quantity: ''
+            price: '',
+            unit: '',
+            count: '',
         })
     };
 
@@ -199,124 +213,127 @@ export default function FarmerDash() {
             <div className={classes.appBarSpacer} />
 
             <main className={classes.content}>
-                <Typography variant="h4">
-                    Register a farm below:
-                </Typography>
+                {isRegistered === false ? (
+                    <Typography variant="h4">
+                        Register a farm below:
+                    </Typography>
+                ): <Typography variant="h4">
+                        Enter your farm items:
+                    </Typography>}
 
                 {/* Farm input field */}
-                <form className={classes.form} noValidate onSubmit={handleFarmFormSubmit}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="name"
-                                label="Farm Name"
-                                name="name"
-                                autoComplete="name"
-                                value={farmFormState.name}
-                                onChange={handleFarmFormChange}
-                            />
+                    {isRegistered === false ? (
+                    <form className={classes.form} noValidate onSubmit={handleFarmFormSubmit}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="name"
+                                    label="Farm Name"
+                                    name="name"
+                                    autoComplete="name"
+                                    value={farmFormState.name}
+                                    onChange={handleFarmFormChange}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="description"
+                                    label="Farm Description"
+                                    name="description"
+                                    autoComplete="description"
+                                    value={farmFormState.description}
+                                    onChange={handleFarmFormChange}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="state"
+                                    label="State"
+                                    name="state"
+                                    autoComplete="state"
+                                    value={farmFormState.state}
+                                    onChange={handleFarmFormChange}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="town"
+                                    label="Town"
+                                    name="town"
+                                    autoComplete="town"
+                                    value={farmFormState.town}
+                                    onChange={handleFarmFormChange}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="address"
+                                    label="Address"
+                                    name="address"
+                                    autoComplete="address"
+                                    value={farmFormState.address}
+                                    onChange={handleFarmFormChange}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="zip"
+                                    label="Zip Code"
+                                    name="zip"
+                                    autoComplete="zip"
+                                    value={farmFormState.zip}
+                                    onChange={handleFarmFormChange}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="website"
+                                    label="Website"
+                                    name="website"
+                                    autoComplete="website"
+                                    value={farmFormState.website}
+                                    onChange={handleFarmFormChange}
+                                />
+                            </Grid>
                         </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="description"
-                                label="Farm Description"
-                                name="description"
-                                autoComplete="description"
-                                value={farmFormState.description}
-                                onChange={handleFarmFormChange}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="state"
-                                label="State"
-                                name="state"
-                                autoComplete="state"
-                                value={farmFormState.state}
-                                onChange={handleFarmFormChange}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="town"
-                                label="Town"
-                                name="town"
-                                autoComplete="town"
-                                value={farmFormState.town}
-                                onChange={handleFarmFormChange}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="address"
-                                label="Address"
-                                name="address"
-                                autoComplete="address"
-                                value={farmFormState.address}
-                                onChange={handleFarmFormChange}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="zip"
-                                label="Zip Code"
-                                name="zip"
-                                autoComplete="zip"
-                                value={farmFormState.zip}
-                                onChange={handleFarmFormChange}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="website"
-                                label="Website"
-                                name="website"
-                                autoComplete="website"
-                                value={farmFormState.website}
-                                onChange={handleFarmFormChange}
-                            />
-                        </Grid>
-                    </Grid>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                    >
-                        Register
-                    </Button>
-                </form>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
+                        >
+                            Register
+                        </Button>
+                    </form>
+                ): <div></div>}
 
                 <div className={classes.appBarSpacer} />
 
                 <div>
                     {isRegistered ? (
                         <div>
-                            <Typography variant="h4">
-                                Enter your farm items:
-                            </Typography>
                             {/* Veggie input field? */}
                             <form className={classes.form} noValidate onSubmit={handleItemFormSubmit}>
                                 <Grid container spacing={2}>
@@ -338,10 +355,10 @@ export default function FarmerDash() {
                                             variant="outlined"
                                             required
                                             fullWidth
-                                            id="description"
-                                            label="Description"
-                                            name="description"
-                                            autoComplete="description"
+                                            id="price"
+                                            label="Cost"
+                                            name="price"
+                                            autoComplete="price"
                                             onChange={handleItemFormChange}
 
                                         />
@@ -351,10 +368,23 @@ export default function FarmerDash() {
                                             variant="outlined"
                                             required
                                             fullWidth
-                                            id="quantity"
-                                            label="Quantity"
-                                            name="quantity"
-                                            autoComplete="quantity"
+                                            id="unit"
+                                            label="Per? (example: lb or each)"
+                                            name="unit"
+                                            autoComplete="unit"
+                                            onChange={handleItemFormChange}
+
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            variant="outlined"
+                                            required
+                                            fullWidth
+                                            id="count"
+                                            label="Quantity Available"
+                                            name="count"
+                                            autoComplete="count"
                                             onChange={handleItemFormChange}
 
                                         />
