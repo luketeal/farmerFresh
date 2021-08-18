@@ -8,6 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 // import logo from './assets/logo/droopLeafV1.png';
 
+import Auth from '../../utils/auth';
+
 const useStyles = makeStyles((theme) => ({
     '@global': {
         ul: {
@@ -68,6 +70,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header({darkMode, setDarkMode}) {
     const classes = useStyles();
+    
+  const logout = (event) => {
+    event.preventDefault();
+    Auth.logout();
+  };
     return (
         <AppBar position="static" color="transparent" elevation={0}>
             <Toolbar className={classes.toolbar}>
@@ -97,9 +104,15 @@ export default function Header({darkMode, setDarkMode}) {
                 <div className="row ">
                     <div className="col-xs-12 col-sm-3 py-3">
                     <nav>
+                    {Auth.loggedIn() ? (   
+                    <Button color="neutral" variant="contained" className={classes.cartBtn} onClick= {logout}>
+                        Log Out
+                    </Button>
+                       ) : (
                     <Button href="#" color="neutral" variant="contained" className={classes.cartBtn}>
                         Cart
                     </Button>
+                       )}
                 </nav>
                 </div>
                 <div className="col-xs-12 col-sm-6 py-3">
@@ -115,7 +128,7 @@ export default function Header({darkMode, setDarkMode}) {
                 }}color="neutral" variant="contained" className={classes.darkModeBtn}>
                     Dark Mode
                 </Button>
-
+               
                 </div>
                 
                 </div>
