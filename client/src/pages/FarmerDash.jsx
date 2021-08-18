@@ -68,8 +68,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-let items = [];
-
 export default function FarmerDash() {
     const classes = useStyles();
     const [dense, setDense] = React.useState(false);
@@ -99,9 +97,10 @@ export default function FarmerDash() {
 
     let [addItem, { loading: loadingNewItem, error: errorNewItem, data: dataNewItem }] = useMutation(CREATE_ITEM);
       
-    let { loading: loadingUser, error: errorUser, data: dataUser } = useQuery(USER_BY_ID);   
+    let { loading: loadingUser, error: errorUser, data: dataUser } = useQuery(USER_BY_ID, {pollInterval: 500});   
     let [isRegistered, setRegistered] = React.useState(loadingUser || dataUser.user.farms === undefined || dataUser.user.farms.length === 0 ? false : true);
-
+    let [hasItems, setHasItems] = React.useState(isRegistered === false || dataUser.user.farms.items === undefined || dataUser.user.farms.items.length === 0 ? false : true)
+    let [items, setItems] = React.useState(hasItems ? dataUser.user.farms[0].items : [])
     useEffect(() => {
         if (!loadingUser && dataUser.user.farms !== undefined && dataUser.user.farms.length !== 0) {
             setRegistered(true)
@@ -110,8 +109,14 @@ export default function FarmerDash() {
                     farmID: dataUser.user.farms[0]._id,
                 }
             )
+            if( dataUser.user.farms[0].items !== undefined && dataUser.user.farms.length !== 0) {
+                setHasItems(true)
+                setItems(dataUser.user.farms[0].items)
+            }
         }
-    },[dataUser])
+        
+
+    },[dataUser, dataNewItem, dataNewFarm])
 
     const username = dataUser?.user?.name || "hmmm....";
 
@@ -173,7 +178,6 @@ export default function FarmerDash() {
     const handleItemFormSubmit = async (event) => {
         event.preventDefault();
         console.log(itemFormState);
-        items.push(itemFormState);
         console.log(items)
         /** 
          * TODO: make sure addItem query works]
@@ -406,12 +410,14 @@ export default function FarmerDash() {
                 </div>
 
                 <div>
-                    {items.length > 0 ? (
+                    {hasItems ? (
                         <div>
                             <Typography variant="h4" className={classes.title}>
                                 Farm items and produce:
                             </Typography>
+                            {items.length > 0 ? items.map((item) => (<p>{item.name} costs ${item.price}/{item.unit}. Quantity: {item.count}</p>)):<div></div>}
                         </div>
+                        
                     ) : <div></div>}
                 </div>
 
