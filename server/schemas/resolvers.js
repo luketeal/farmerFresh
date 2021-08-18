@@ -46,7 +46,10 @@ const resolvers = {
       
       if (context.user) {
         console.log(context.user._id)
-        const me = await User.findOne({_id: context.user._id })
+        const me = await User.findOne({_id: context.user._id }).populate('farms').populate({
+          path: 'farms',
+          populate: "items"
+        })
         console.log(me)
         return me
       }
@@ -65,9 +68,9 @@ const resolvers = {
   // mutation to add farms
   Mutation: {
   
-    addFarm: async(parent, {name, description, state, town, address, website, zip}) => {  // addcontext back in.
+    addFarm: async(parent, {name, description, state, town, address, website, zip}, context) => {  // addcontext back in.
       
-      // if (context.user) { //<---- uncomment this when implementing authentication
+      if (context.user) { //<---- uncomment this when implementing authentication
       let newFarm = await Farm.create(  // changed return farm into variable newFarm. 
         { 
           name: name,
@@ -80,17 +83,17 @@ const resolvers = {
         });
 
         // ----- Uncomment these lines when figuring out authentication
-        // let updatedUser = await User.findOneAndUpdate(     // created updated user variable  to find a user from context.
-          // {_id: context.user._id},                    // attempting to find user based on the context user object.
-          // {$addToSet: {farms: newFarm._id}},   // attempting to set the farm to user id.
-          // {new: true}
-          // ).populate('farms') // populating the farms array.
+        let updatedUser = await User.findOneAndUpdate(     // created updated user variable  to find a user from context.
+          {_id: context.user._id},                    // attempting to find user based on the context user object.
+          {$addToSet: {farms: newFarm._id}},   // attempting to set the farm to user id.
+          {new: true}
+          ).populate('farms') // populating the farms array.
 
-          // return updatedUser    // returning updated user 
-        // }
-        // throw new AuthenticationError('You need to be logged in!');
+          return newFarm    // returning updated user 
+        }
+        throw new AuthenticationError('You need to be logged in!');
         // -------------------
-        return newFarm  // <----- Delete this when implementing authentication
+        // return newFarm  // <----- Delete this when implementing authentication
     },
 
     addUser: async(parent, {name, email, password}) => {

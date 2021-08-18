@@ -76,3 +76,31 @@ query farmByID($_id: ID!) {
 }
 
 `
+
+export const USER_BY_ID = gql `
+query user{
+  user {
+    _id
+    name
+    email
+    farms {
+      _id
+      name
+      description
+      state
+      town
+      address
+      website
+      zip
+      items {
+        _id
+        name
+        price
+        count
+        unit
+      }
+    }
+  }
+}
+
+`
