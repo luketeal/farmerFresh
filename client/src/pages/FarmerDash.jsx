@@ -450,50 +450,44 @@ export default function FarmerDash() {
                             </Typography>
                             {items.length > 0 ? items.map((item) => {
                                 return (
-                                // <p>{item.name} costs ${item.price}/{item.unit}. Quantity: {item.count}</p>
-                                
                                 <Grid item key={item} xs={12} sm={6} md={4}>
-                                <Card id="cardContent" className={classes.card}>
-                                    <CardMedia
-                                        className={classes.cardMedia}
-                                        image="https://images.unsplash.com/photo-1597362925123-77861d3fbac7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2700&q=80"
-                                        title="Image title"
-                                    />
-                                    <CardContent className={classes.cardContent}>
-                                        <Typography gutterBottom variant="h5" component="h2">
-                                            {item.name}
-                                        </Typography>
-                                        <Typography>
-                                            <ul>
-                                                <li>
-                                                    Price: ${item.price} {item.unit}
-                                                </li>
-                                                <li>
-                                                    Quantity: {item.count}
-                                                </li>
-                                            </ul>
-                                        </Typography>
-                                    </CardContent>
-                                    <CardActions>
-                                            <div className="row w-100">
-                                                <div className="col">
-                                                <Button size="small" color="secondary" variant="outlined" value={item._id} /*onClick={() => handleEdit(item._id) }*/>
-                                                Edit
-                                                </Button>
-                                                </div>
-                                                <div className="col">
-                                                    <Button size="small" color="secondary" variant="outlined" value={item._id} /*onClick={() => handleDelete(item._id) }*/>
-                                                    Delete
+                                    <Card id="cardContent" className={classes.card}>
+                                        <CardMedia
+                                            className={classes.cardMedia}
+                                            image="https://images.unsplash.com/photo-1597362925123-77861d3fbac7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2700&q=80"
+                                            title="Image title"
+                                        />
+                                        <CardContent className={classes.cardContent}>
+                                            <Typography gutterBottom variant="h5" component="h2">
+                                                {item.name}
+                                            </Typography>
+                                            <Typography>
+                                                <ul>
+                                                    <li>
+                                                        Price: ${item.price} {item.unit}
+                                                    </li>
+                                                    <li>
+                                                        Quantity: {item.count}
+                                                    </li>
+                                                </ul>
+                                            </Typography>
+                                        </CardContent>
+                                        <CardActions>
+                                                <div className="row w-100">
+                                                    <div className="col">
+                                                    <Button size="small" color="secondary" variant="outlined" value={item._id} /*onClick={() => handleEdit(item._id) }*/>
+                                                    Edit
                                                     </Button>
+                                                    </div>
+                                                    <div className="col">
+                                                        <Button size="small" color="secondary" variant="outlined" value={item._id} /*onClick={() => handleDelete(item._id) }*/>
+                                                        Delete
+                                                        </Button>
+                                                    </div>
                                                 </div>
-                                            </div>
-
-                                        
-                                    </CardActions>
-                                </Card>
+                                        </CardActions>
+                                    </Card>
                                 </Grid>
-                                
-                                
                                 )}):<div></div>}
                         </div>
                         
