@@ -11,7 +11,7 @@ type User{
         email: String
         password: String
         farms:[Farm]
-     }
+}
   
 type Farm{
 
@@ -46,7 +46,7 @@ type Query {
     farm(_id: ID!): Farm
     farms: [Farm]
     farmsByZip (zip: [String!]): [Farm]
-    user(_id: String!): User
+    user: User
     users: [User]
     item(_id: String!): Item
     items: [Item]

@@ -19,7 +19,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { CREATE_FARM } from '../utils/mutations';
 import { CREATE_ITEM } from '../utils/mutations';
+import {USER_BY_ID} from '../utils/queries'
 import { useQuery, useMutation } from '@apollo/client';
+import Auth from '../utils/auth';
 
 
 // Generating list items
@@ -88,9 +90,26 @@ export default function FarmerDash() {
         quantity: '',
         // imageURL: '',
     })
-    let [addFarm, { error, data }] = useMutation(CREATE_FARM);
-    let [addItem, { e, d }] = useMutation(CREATE_ITEM);
+    let data1;
 
+    let [addFarm, { loading: loadingNewFarm, error: errorNewFarm, data: dataNewFarm }] = useMutation(CREATE_FARM);
+
+    let [addItem, { loading: loadingNewItem, error: errorNewItem, data: dataNewItem }] = useMutation(CREATE_ITEM);
+      
+    let { loading: loadingUser, error: errorUser, data: dataUser } = useQuery(USER_BY_ID);    
+    if(loadingUser) {
+        console.log('loading')
+    }
+    if(errorUser) {
+        console.log(errorUser)
+    }
+    if(dataUser) {
+        data1 = dataUser
+    }
+
+    const username = data1?.user.name || "hmmm....";
+    // const profile = Auth.getProfile()
+    // console.log(profile.data._id)
 
     const handleFarmFormChange = (event) => {
         const { name, value } = event.target;
@@ -174,7 +193,7 @@ export default function FarmerDash() {
             <CssBaseline />
 
             <Typography component="h1" variant="h2">
-                Hi *username*
+                Hi {username}
             </Typography>
 
             <div className={classes.appBarSpacer} />

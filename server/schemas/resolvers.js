@@ -42,11 +42,15 @@ const resolvers = {
       return User.find();
     },
 
-    user: async (parent, { _id}) => {
-      return User.findOne({ _id }).populate('farms').populate({
-        path: 'farms',
-        populate: 'items'
-      })
+    user: async (parent, args, context) => {
+      
+      if (context.user) {
+        console.log(context.user._id)
+        const me = await User.findOne({_id: context.user._id })
+        console.log(me)
+        return me
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
 
     item: async (parent, { _id }) => {
