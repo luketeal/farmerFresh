@@ -182,14 +182,12 @@ export default function FarmerDash() {
          * **/
 
         try {
-            let { data } = await addItem({
-                variable: {
-                    ...itemFormState,
-                }
+            let { loading, error, data } = await addItem({
+                variables: { ...itemFormState }
             });
             console.log(data)
-        } catch (e) {
-            console.error(e)
+        } catch (error) {
+            console.error(error)
         }
 
         setItemFormState({
