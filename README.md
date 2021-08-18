@@ -8,6 +8,10 @@ Farmer fresh is an MERN stack app for farmers to register their farms and sell t
 ```bash
 npm install
 ```
+# Tools
+
+HTML, CSS, Bootstrap, JavaScript, React, Node.js, Express.js, GraphQL, MongoDB and Mongoose, Robo 3T, Json Web Tokens (JWT), Dotenv, Heroku.
+
 # Usage
 
 1. Farmer goes on to Farmer Portal and register the farm to create a farm.
