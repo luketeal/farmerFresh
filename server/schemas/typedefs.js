@@ -63,7 +63,7 @@ type Mutation {
     updateFarm(_id: ID!, name: String, description: String, state: String, town: String, address: String, website: String, zip: String): Farm
     updateItem(_id: ID!, name: String, price: String, count: String, unit: String): Item
     removeFarm(farmId: ID!): Farm
-    removeItem(itemId: ID!, farmId: ID!): Item
+    removeItem(farmId: ID!, itemId: ID!): Item
     removeUser(userId: ID!): User
 }
 

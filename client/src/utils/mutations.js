@@ -167,3 +167,14 @@ mutation removeFarm($farmId: ID!) {
   zip
   }
 }`;
+
+export const REMOVE_ITEM = gql`
+mutation removeoneItem($farmId: ID!, $itemId: ID!) {
+  removeItem(farmId: $farmId, itemId:$itemId) {
+  _id
+  name
+  price
+	count
+	unit
+  }
+}`;
