@@ -415,7 +415,9 @@ export default function FarmerDash() {
                             <Typography variant="h4" className={classes.title}>
                                 Farm items and produce:
                             </Typography>
+                            {items.length > 0 ? items.map((item) => (<p>{item.name} costs ${item.price}/{item.unit}. Quantity: {item.count}</p>)):<div></div>}
                         </div>
+                        
                     ) : <div></div>}
                 </div>
 
