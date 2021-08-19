@@ -120,9 +120,12 @@ export default function Header({darkMode, setDarkMode}) {
                         LogOut
                     </Button>
                        ) : (
-                    <Button href="#" color="neutral" variant="contained" className={classes.cartBtn}>
-                        Cart
-                    </Button>
+                           <Link to="/cart" style={{ textDecoration: 'none' }}>
+                                <Button href="#" color="neutral" variant="contained" className={classes.cartBtn}>
+                                    Cart
+                                </Button>
+                           </Link>
+
                        )}
                 </nav>
                 </div>
