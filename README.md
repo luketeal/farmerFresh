@@ -40,7 +40,7 @@ Swetha Reddivari - [GitHub](https://github.com/swethareddyl)
 
 * [FarmerFresh] (https://github.com/luketeal/farmerFresh/)
 
-* [Heroku Deployed Application] ()
+* [Heroku Deployed Application] (https://farmerfresh.herokuapp.com/)
 
 ## Credits
 
