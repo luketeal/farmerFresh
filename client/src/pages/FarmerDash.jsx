@@ -17,21 +17,12 @@ import IconButton from '@material-ui/core/IconButton';
 import FolderIcon from '@material-ui/icons/Folder';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-import { CREATE_FARM } from '../utils/mutations';
+import { CREATE_FARM, REMOVE_FARM, REMOVE_ITEM, UPDATE_ITEM } from '../utils/mutations';
 import { CREATE_ITEM } from '../utils/mutations';
-import {USER_BY_ID} from '../utils/queries'
+import { USER_BY_ID } from '../utils/queries'
 import { useQuery, useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 
-
-// Generating list items
-function generate(element) {
-    return [0, 1, 2, 3, 4, 5, 6].map((value) =>
-        React.cloneElement(element, {
-            key: value,
-        }),
-    );
-};
 
 
 const useStyles = makeStyles((theme) => ({
@@ -81,7 +72,6 @@ export default function FarmerDash() {
         address: '',
         zip: '',
         website: '',
-        // imageURL: '',
     })
     const [itemFormState, setItemFormState] = React.useState({
         name: '',
@@ -89,39 +79,35 @@ export default function FarmerDash() {
         unit: '',
         count: '',
         farmID: '',
-        // imageURL: '',
     })
     let data1;
 
     let [addFarm, { loading: loadingNewFarm, error: errorNewFarm, data: dataNewFarm }] = useMutation(CREATE_FARM);
-
     let [addItem, { loading: loadingNewItem, error: errorNewItem, data: dataNewItem }] = useMutation(CREATE_ITEM);
-      
-    let { loading: loadingUser, error: errorUser, data: dataUser } = useQuery(USER_BY_ID, {pollInterval: 500});   
+    let [removeItem, { loading: loadingRemoveItem, error: errorRemoveItem, data: dataRemoveItem }] = useMutation(REMOVE_ITEM);
+    let { loading: loadingUser, error: errorUser, data: dataUser } = useQuery(USER_BY_ID, { pollInterval: 500 });
     let [isRegistered, setRegistered] = React.useState(loadingUser || dataUser.user.farms === undefined || dataUser.user.farms.length === 0 ? false : true);
     let [hasItems, setHasItems] = React.useState(isRegistered === false || dataUser.user.farms.items === undefined || dataUser.user.farms.items.length === 0 ? false : true)
     let [items, setItems] = React.useState(hasItems ? dataUser.user.farms[0].items : [])
     useEffect(() => {
         if (!loadingUser && dataUser.user.farms !== undefined && dataUser.user.farms.length !== 0) {
             setRegistered(true)
-            setItemFormState (            
-                {   ...itemFormState,
+            setItemFormState(
+                {
+                    ...itemFormState,
                     farmID: dataUser.user.farms[0]._id,
                 }
             )
-            if( dataUser.user.farms[0].items !== undefined && dataUser.user.farms.length !== 0) {
+            if (dataUser.user.farms[0].items !== undefined && dataUser.user.farms.length !== 0) {
                 setHasItems(true)
                 setItems(dataUser.user.farms[0].items)
             }
         }
-        
 
-    },[dataUser, dataNewItem, dataNewFarm])
+
+    }, [dataUser, dataNewItem, dataNewFarm])
 
     const username = dataUser?.user?.name || "hmmm....";
-
-    // const profile = Auth.getProfile()
-    // console.log(profile.data._id)
 
     const handleFarmFormChange = (event) => {
         const { name, value } = event.target;
@@ -150,8 +136,9 @@ export default function FarmerDash() {
             let { data } = await addFarm({
                 variables: { ...farmFormState },
             })
-            setItemFormState (            
-                {   ...itemFormState,
+            setItemFormState(
+                {
+                    ...itemFormState,
                     farmID: data.addFarm._id,
                 }
             )
@@ -160,7 +147,7 @@ export default function FarmerDash() {
         } catch (e) {
             console.error(e);
         }
- 
+
 
         // clear form values
         setFarmFormState({
@@ -171,7 +158,6 @@ export default function FarmerDash() {
             address: '',
             zip: '',
             website: '',
-            imageURL: '',
         });
     };
 
@@ -179,11 +165,6 @@ export default function FarmerDash() {
         event.preventDefault();
         console.log(itemFormState);
         console.log(items)
-        /** 
-         * TODO: make sure addItem query works]
-         * TODO: add farmId or add item to farm object
-         * TODO: fix farm items grid view to correspond with items array
-         * **/
 
         try {
             let { loading, error, data } = await addItem({
@@ -203,7 +184,20 @@ export default function FarmerDash() {
         })
     };
 
-
+    const handleRemoveItem = async (itemId) => {
+        let removeItemVariables = {
+            farmId: itemFormState.farmID,
+            itemId: itemId
+        }
+        console.log(removeItemVariables)
+        try {
+            let { loading, error, data } = await removeItem({
+                variables: { ...removeItemVariables }
+            })
+        } catch (error) {
+            console.error(error)
+        }
+    }
 
     return (
         <Container component="main" maxWidth="md" id="farmerDashContainer">
@@ -221,12 +215,12 @@ export default function FarmerDash() {
                     <Typography variant="h4">
                         Register a farm below:
                     </Typography>
-                ): <Typography variant="h4">
-                        Enter your farm items:
-                    </Typography>}
+                ) : <Typography variant="h4">
+                    Enter your farm items:
+                </Typography>}
 
                 {/* Farm input field */}
-                    {isRegistered === false ? (
+                {isRegistered === false ? (
                     <form className={classes.form} noValidate onSubmit={handleFarmFormSubmit}>
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
@@ -331,7 +325,7 @@ export default function FarmerDash() {
                             Register
                         </Button>
                     </form>
-                ): <div></div>}
+                ) : <div></div>}
 
                 <div className={classes.appBarSpacer} />
 
@@ -350,8 +344,8 @@ export default function FarmerDash() {
                                             label="Item Name"
                                             name="name"
                                             autoComplete="name"
+                                            value={itemFormState.name}
                                             onChange={handleItemFormChange}
-
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
@@ -363,8 +357,8 @@ export default function FarmerDash() {
                                             label="Cost"
                                             name="price"
                                             autoComplete="price"
+                                            value={itemFormState.price}
                                             onChange={handleItemFormChange}
-
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
@@ -376,8 +370,8 @@ export default function FarmerDash() {
                                             label="Per? (example: lb or each)"
                                             name="unit"
                                             autoComplete="unit"
+                                            value={itemFormState.unit}
                                             onChange={handleItemFormChange}
-
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
@@ -389,8 +383,8 @@ export default function FarmerDash() {
                                             label="Quantity Available"
                                             name="count"
                                             autoComplete="count"
+                                            value={itemFormState.count}
                                             onChange={handleItemFormChange}
-
                                         />
                                     </Grid>
 
@@ -415,9 +409,38 @@ export default function FarmerDash() {
                             <Typography variant="h4" className={classes.title}>
                                 Farm items and produce:
                             </Typography>
-                            {items.length > 0 ? items.map((item) => (<p>{item.name} costs ${item.price}/{item.unit}. Quantity: {item.count}</p>)):<div></div>}
+
+                            <Grid container spacing={2}>
+                                <Grid item xs={12} md={12}>
+                                    <div id="listItems">
+                                        <List dense={dense}>
+                                            {items.length > 0 ? items.map((item) => (
+                                                <ListItem>
+                                                    <ListItemAvatar>
+                                                        <Avatar>
+                                                            <FolderIcon />
+                                                        </Avatar>
+                                                    </ListItemAvatar>
+                                                    <ListItemText
+                                                        primary={<p>{item.name}</p>}
+                                                        secondary={<p>Costs: ${item.price}/{item.unit}.   Quantity Available: {item.count}</p>}
+                                                    />
+
+                                                    <div className={classes.appBarSpacer} />
+
+                                                    <ListItemSecondaryAction>
+                                                        <IconButton color="secondary" edge="end" aria-label="delete" onClick={() => handleRemoveItem(item._id,)}>
+                                                            <DeleteIcon />
+                                                        </IconButton>
+                                                    </ListItemSecondaryAction>
+                                                </ListItem>
+                                            )) : <div></div>}
+                                        </List>
+                                    </div>
+                                </Grid>
+                            </Grid>
                         </div>
-                        
+
                     ) : <div></div>}
                 </div>
 
