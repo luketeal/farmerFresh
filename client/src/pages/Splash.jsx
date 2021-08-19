@@ -101,7 +101,7 @@ export default function Pricing() {
                         Find a farming community now
                     </Typography>
                     <Typography variant="h5" align="center" color="textSecondary" component="p">
-                        Search for fresh produce in near you
+                        Search for fresh produce near you
                     </Typography>
 
 
@@ -125,29 +125,7 @@ export default function Pricing() {
                                 Search
                             </Button>
                         </Link>
-                        
-
-
-
-                        {/* Idk what to do */}
-                        {/* <Link color="inherit"
-                            to={{
-                                pathname: "./farmresults",
-                                state: {
-                                    farmState: zipcode
-                                }
-                            }}>
-                            <Button href="./farmresults" variant="contained" color="neutral" className={classes.searchBtn} >
-                                Search
-                            </Button>
-                        </Link> */}
-
-
-
-
-
                     </div>
-
                 </Container>
                 {/* End hero unit */}
             </Box>
