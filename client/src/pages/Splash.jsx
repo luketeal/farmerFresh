@@ -75,7 +75,7 @@ export default function Pricing() {
     };
 
 
-    const { loading, error, data } = useQuery(ALL_FARMS);
+    const { loading, error, data } = useQuery(ALL_FARMS, { pollInterval: 500 });
     console.log(data)
 
     if (loading) return 'Loading...';
