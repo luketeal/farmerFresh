@@ -81,7 +81,9 @@ export default function Pricing() {
     if (loading) return 'Loading...';
     if (error) return `Error! ${error.message}`;
     const farms = data?.farms || [];
+    const uniqueFarms = [...new Set(farms)];
     console.log(farms)
+    console.log(uniqueFarms);
 
 
     return (
@@ -99,7 +101,7 @@ export default function Pricing() {
                         Find a farming community now
                     </Typography>
                     <Typography variant="h5" align="center" color="textSecondary" component="p">
-                        Search for fresh produce in near you
+                        Search for fresh produce near you
                     </Typography>
 
 
@@ -112,7 +114,7 @@ export default function Pricing() {
                             onChange={handleChange}
                         >
                             {
-                                farms.map(farm => <MenuItem value={farm.state}>{farm.state}</MenuItem>)
+                                uniqueFarms.map(farm => <MenuItem value={farm.state}>{farm.state}</MenuItem>)
                             }
                         </Select>
                     </FormControl>
@@ -123,29 +125,7 @@ export default function Pricing() {
                                 Search
                             </Button>
                         </Link>
-                        
-
-
-
-                        {/* Idk what to do */}
-                        {/* <Link color="inherit"
-                            to={{
-                                pathname: "./farmresults",
-                                state: {
-                                    farmState: zipcode
-                                }
-                            }}>
-                            <Button href="./farmresults" variant="contained" color="neutral" className={classes.searchBtn} >
-                                Search
-                            </Button>
-                        </Link> */}
-
-
-
-
-
                     </div>
-
                 </Container>
                 {/* End hero unit */}
             </Box>
