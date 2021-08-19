@@ -15,7 +15,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import { useFarmContext } from '../utils/_farmcontext';
+import { useFarmContext } from '../utils/FarmContext';
 import {FARMS_BY_ID} from '../utils/queries'
 import { useQuery } from '@apollo/client';
 

@@ -1,7 +1,7 @@
 const { AuthenticationError } = require('apollo-server-express');
 
 const { Farm, User, Item } = require('../models');
-const { populate } = require('../models/_farm');
+const { populate } = require('../models/Farm');
 const { signToken } = require('../utils/auth');
 // const {getZips} = require('../utils/getZips');
 
