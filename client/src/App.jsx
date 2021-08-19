@@ -14,6 +14,7 @@ import {useState} from "react";
 import {useEffect} from 'react';
 import Auth from './utils/auth';
 import { setContext } from '@apollo/client/link/context';
+import Cart from './pages/Cart';
 
 
 
@@ -94,6 +95,9 @@ function App() {
             <Route exact path="/farmveggieresults">
               <FarmVeggieResults />
 
+            </Route>
+            <Route exact path="/cart">
+              <Cart/>
             </Route>
           
         </div>
