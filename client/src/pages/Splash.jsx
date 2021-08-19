@@ -81,7 +81,9 @@ export default function Pricing() {
     if (loading) return 'Loading...';
     if (error) return `Error! ${error.message}`;
     const farms = data?.farms || [];
+    const uniqueFarms = [...new Set(farms)];
     console.log(farms)
+    console.log(uniqueFarms);
 
 
     return (
@@ -112,7 +114,7 @@ export default function Pricing() {
                             onChange={handleChange}
                         >
                             {
-                                farms.map(farm => <MenuItem value={farm.state}>{farm.state}</MenuItem>)
+                                uniqueFarms.map(farm => <MenuItem value={farm.state}>{farm.state}</MenuItem>)
                             }
                         </Select>
                     </FormControl>
