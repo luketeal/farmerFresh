@@ -34,13 +34,14 @@ HTML, CSS, Bootstrap, JavaScript, React, Node.js, Express.js, GraphQL, MongoDB a
 ## Contact
 
 Luke Teal - [GitHub](https://github.com/luketeal)
-Kit Long - [GitHub] (https://github.com/kitclong)
+Kit Long - [GitHub](https://github.com/kitclong)
 Joshua Figuereo - [GitHub](https://github.com/Jfig27)
 Swetha Reddivari - [GitHub](https://github.com/swethareddyl)
+Corey Nance - [Github](https://github.com/coreyNance)
 
-* [FarmerFresh] (https://github.com/luketeal/farmerFresh/)
+* [FarmerFresh](https://github.com/luketeal/farmerFresh/)
 
-* [Heroku Deployed Application] (https://farmerfresh.herokuapp.com/)
+* [Heroku Deployed Application](https://farmerfresh.herokuapp.com/)
 
 ## Credits
 
