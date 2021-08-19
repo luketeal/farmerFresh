@@ -15,7 +15,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { ALL_FARMS } from '../utils/queries';
 import { useQuery } from '@apollo/client';
-import { useFarmContext } from '../utils/_farmcontext';
+import { useFarmContext } from '../utils/FarmContext';
 
 
 const useStyles = makeStyles((theme) => ({

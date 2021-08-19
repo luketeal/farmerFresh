@@ -1,15 +1,15 @@
-import './_app.scss';
+import './App.scss';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Header from './components/_header/_header'
-import Splash from './pages/_splash'
-import Signin from './pages/_signin';
-import SignUp from './pages/_signup';
-import FarmResults from './pages/_farmresults';
-import FarmerDash from './pages/_farmerdash';
-import Footer from './components/_footer/_footer';
-import FarmVeggieResults from './pages/_farmveggieresults';
+import Header from './components/Header/Header'
+import Splash from './pages/Splash'
+import Signin from './pages/SignIn';
+import SignUp from './pages/SignUp';
+import FarmResults from './pages/FarmResults';
+import FarmerDash from './pages/FarmerDash';
+import Footer from './components/Footer/Footer';
+import FarmVeggieResults from './pages/FarmVeggieResults';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
-import { FarmProvider } from './utils/_farmcontext';
+import { FarmProvider } from './utils/FarmContext';
 import {useState} from "react";
 import {useEffect} from 'react';
 import Auth from './utils/auth';
