@@ -40,7 +40,7 @@ function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
+            <Link color="inherit" href="https://github.com/luketeal/farmerFresh">
                 Farmer Fresh Marketplace
             </Link>{' '}
             {new Date().getFullYear()}

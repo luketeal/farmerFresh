@@ -24,15 +24,6 @@ import { useQuery, useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 
 
-// Generating list items
-function generate(element) {
-    return [0, 1, 2, 3, 4, 5, 6].map((value) =>
-        React.cloneElement(element, {
-            key: value,
-        }),
-    );
-};
-
 
 const useStyles = makeStyles((theme) => ({
 
@@ -81,7 +72,6 @@ export default function FarmerDash() {
         address: '',
         zip: '',
         website: '',
-        // imageURL: '',
     })
     const [itemFormState, setItemFormState] = React.useState({
         name: '',
@@ -89,16 +79,12 @@ export default function FarmerDash() {
         unit: '',
         count: '',
         farmID: '',
-        // imageURL: '',
     })
     let data1;
 
     let [addFarm, { loading: loadingNewFarm, error: errorNewFarm, data: dataNewFarm }] = useMutation(CREATE_FARM);
-
     let [addItem, { loading: loadingNewItem, error: errorNewItem, data: dataNewItem }] = useMutation(CREATE_ITEM);
-
     let [removeItem, { loading: loadingRemoveItem, error: errorRemoveItem, data: dataRemoveItem }] = useMutation(REMOVE_ITEM);
-
     let { loading: loadingUser, error: errorUser, data: dataUser } = useQuery(USER_BY_ID, { pollInterval: 500 });
     let [isRegistered, setRegistered] = React.useState(loadingUser || dataUser.user.farms === undefined || dataUser.user.farms.length === 0 ? false : true);
     let [hasItems, setHasItems] = React.useState(isRegistered === false || dataUser.user.farms.items === undefined || dataUser.user.farms.items.length === 0 ? false : true)
@@ -122,9 +108,6 @@ export default function FarmerDash() {
     }, [dataUser, dataNewItem, dataNewFarm])
 
     const username = dataUser?.user?.name || "hmmm....";
-
-    // const profile = Auth.getProfile()
-    // console.log(profile.data._id)
 
     const handleFarmFormChange = (event) => {
         const { name, value } = event.target;
@@ -426,7 +409,6 @@ export default function FarmerDash() {
                             <Typography variant="h4" className={classes.title}>
                                 Farm items and produce:
                             </Typography>
-                            {/* {items.length > 0 ? items.map((item) => (<p>{item.name} costs ${item.price}/{item.unit}. Quantity: {item.count}</p>)) : <div></div>} */}
 
                             <Grid container spacing={2}>
                                 <Grid item xs={12} md={12}>
@@ -440,14 +422,14 @@ export default function FarmerDash() {
                                                         </Avatar>
                                                     </ListItemAvatar>
                                                     <ListItemText
-                                                        primary={<p>{item.name} costs ${item.price}/{item.unit}. Quantity: {item.count}</p>}
-                                                        secondary={secondary ? 'Secondary text' : null}
+                                                        primary={<p>{item.name}</p>}
+                                                        secondary={<p>Costs: ${item.price}/{item.unit}.   Quantity Available: {item.count}</p>}
                                                     />
 
                                                     <div className={classes.appBarSpacer} />
 
                                                     <ListItemSecondaryAction>
-                                                        <IconButton edge="end" aria-label="delete" onClick={() => handleRemoveItem(item._id,)}>
+                                                        <IconButton color="secondary" edge="end" aria-label="delete" onClick={() => handleRemoveItem(item._id,)}>
                                                             <DeleteIcon />
                                                         </IconButton>
                                                     </ListItemSecondaryAction>
