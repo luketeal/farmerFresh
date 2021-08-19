@@ -11,7 +11,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Link } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
-import { useFarmContext } from '../utils/FarmContext';
+import { useFarmContext } from '../utils/_farmcontext';
 import {FARMS_BY_STATE} from '../utils/queries'
 import { useQuery } from '@apollo/client';
 
