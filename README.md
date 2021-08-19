@@ -16,13 +16,17 @@ HTML, CSS, Bootstrap, JavaScript, React, Node.js, Express.js, GraphQL, MongoDB a
 
 1. Farmer goes on to Farmer Portal and register the farm to create a farm.
 
-2. User can go on to the search page and find the farming community for the provided states in the drop down and click on the search button.
+2. User can register a farm by the signup button.
 
-3. A list of farms displayed by selected state on the next page.
+3. User can signin once registered and  add the items,inventory of the items available and price for the items in their farm.
 
-4. Once clicked on the selected farm the available produce of the farm will be displayed on the next page.
+4. Customers can go on to the search page and find the farming community for the provided states in the drop down and click on the search button.
 
-5. When the user clicks on Buy button, it prompts to the next page for the units or counts of the quantity required, the user clicks add to cart button and the list of items will be reviewed and the user can place the order.
+5. A list of farms displayed by selected state on the next page.
+
+6. Once clicked on the selected farm the available produce of the farm will be displayed on the next page.
+
+
 
 ## Screenshots
 
