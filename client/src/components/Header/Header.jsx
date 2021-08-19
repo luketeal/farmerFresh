@@ -115,10 +115,12 @@ export default function Header({darkMode, setDarkMode}) {
                 <div className="row">
                     <div className="col-xs-12 col-sm-3 py-3 px-0">
                     <nav>
-                    {Auth.loggedIn() ? (   
-                    <Button color="neutral" variant="contained" className={classes.logoutBtn} onClick= {logout}>
-                        LogOut
-                    </Button>
+                    {Auth.loggedIn() ? (  
+                        <Link to="/" style={{ textDecoration: 'none' }}>
+                            <Button color="neutral" variant="contained" className={classes.logoutBtn} onClick= {logout}>
+                                LogOut
+                            </Button>   
+                        </Link>
                        ) : (
                            <Link to="/cart" style={{ textDecoration: 'none' }}>
                                 <Button href="#" color="neutral" variant="contained" className={classes.cartBtn}>
