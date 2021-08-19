@@ -9,6 +9,9 @@
     "seed": "node seeders/seed.js",
     "build": "react-scripts build"
   },
+  "engines": {
+    "node": "16.0.0"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -26,3 +29,4 @@
     "nodemon": "^2.0.3"
   }
 }
+
